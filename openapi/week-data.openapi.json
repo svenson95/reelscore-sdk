@@ -1,0 +1,30 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore week-data contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "FixturesWeekData": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "./fixtures.openapi.json#/components/schemas/ExtendedFixtureDTO"
+          }
+        }
+      },
+      "StandingsWeekData": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "./standings.openapi.json#/components/schemas/StandingsDTO"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore common contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "MongoDbId": {
+        "type": "string"
+      },
+      "OperationStatus": {
+        "type": "string"
+      },
+      "OperationError": {},
+      "OperationResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/OperationStatus"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "x-typescript-type": "Date"
+          },
+          "documents": {
+            "type": "array",
+            "items": {}
+          },
+          "errors": {
+            "$ref": "#/components/schemas/OperationError"
+          }
+        },
+        "required": [
+          "status",
+          "time",
+          "documents",
+          "errors"
+        ],
+        "x-typescript-generic-array": "documents"
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore analyses contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "FixturePlayersWithStreak": {
+        "type": "object",
+        "properties": {
+          "home": {
+            "$ref": "./players.openapi.json#/components/schemas/GoalScorers"
+          },
+          "away": {
+            "$ref": "./players.openapi.json#/components/schemas/GoalScorers"
+          }
+        },
+        "required": [
+          "home",
+          "away"
+        ]
+      },
+      "FixtureHomeOrAwayStrong": {
+        "type": "object",
+        "properties": {
+          "home": {
+            "type": "boolean"
+          },
+          "away": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "home",
+          "away"
+        ]
+      },
+      "AnalysesDTO": {
+        "type": "object",
+        "properties": {
+          "playersWithStreak": {
+            "$ref": "#/components/schemas/FixturePlayersWithStreak"
+          },
+          "homeOrAwayStrong": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FixtureHomeOrAwayStrong"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "playersWithStreak",
+          "homeOrAwayStrong"
+        ]
+      }
+    }
+  }
+}

@@ -1,23 +1,30 @@
 # reelscore-sdk
 
-OpenAPI contracts, generated TypeScript models, shared TypeScript helpers and
-constants. This first migration is consumed by `reelscore` as `reelscore-sdk`.
-`reelscore-controller` and `reelscore-ios-app` are future consumers.
+OpenAPI contracts, generated TypeScript models, shared helpers and constants.
+The SDK owns all contracts previously declared in reelscore's `lib/models`.
 
 ## Structure
 
-- `openapi/fixtures.openapi.json`: authoritative OpenAPI 3.1 fixture contracts,
-  including the team, league, status and event definitions required by fixtures.
-- `src/generated/`: generated TypeScript contracts, named model aliases and
-  prediction constants. Commit these files; edit the OpenAPI source instead.
-- `src/models/`: public model entry point.
-- `src/shared/constants/`: hand-written competition constants.
-- `src/shared/helpers/`: TypeScript date logic, tested in Berlin time.
-- `scripts/`: reproducible model generation and ESM/CommonJS builds.
-- `tests/`: payload compatibility, date behavior and package entry-point tests.
+`openapi/reelscore.openapi.json` is the source entry point. It references domain
+files for common responses, competitions, teams, coaches, players, standings,
+fixtures, fixture status, events, statistics, analyses, evaluations, search,
+provider responses, live updates and week data. Each definition has one owner.
+Fixture projections reference the common team and competition definitions.
 
-The pre-existing `openai/examples/` placeholders are preserved. They are not used
-by generation. The schema directory for this project is `openapi/`.
+- `openapi/reelscore.bundled.openapi.json`: generated standalone OpenAPI 3.1
+  document for tools that prefer one file, including future Swift generators.
+- `src/generated/`: generated TypeScript contracts, named aliases and prediction
+  constants. Edit the source schemas and regenerate; do not edit generated files.
+- `src/models/`: public type entry point.
+- `src/shared/constants/`: competition codes, fixture status groups and realtime
+  event names. Existing values and array types are preserved.
+- `src/shared/helpers/`: date and event calculations.
+- `scripts/`: domain reference resolution, generation and ESM/CommonJS builds.
+- `tests/`: schema payload validation, consumer type contracts, date behavior and
+  package entry-point compatibility.
+
+The pre-existing `openai/examples/` placeholders are preserved and are not used
+by generation. The schema directory is `openapi/`.
 
 ## Development
 
@@ -30,47 +37,61 @@ npm test
 npm pack
 ```
 
-`npm test` builds first. `npm pack` checks generated files, lints, builds and tests
-before creating a tarball. The package is private during the local pilot; no
-registry publishing is configured. Generated JavaScript and declarations go to
-`dist/`; consumers receive both ESM and CommonJS entry points.
+`npm test` builds the package, checks consumer types and runs behavior tests.
+`npm pack` verifies generated files, lints and tests before creating the archive.
+The local pilot remains private; no registry publishing is configured.
 
 ```ts
-import type { ExtendedFixtureDTO, GetFixtureDTO } from 'reelscore-sdk/models';
-import { CompetitionCode } from 'reelscore-sdk/constants';
-import { formatFixtureTime } from 'reelscore-sdk/helpers';
+import type { CompetitionDTO, TeamDTO, ExtendedFixtureDTO } from 'reelscore-sdk/models';
+import { CompetitionCode, REALTIME_EVENT } from 'reelscore-sdk/constants';
+import { formatFixtureTime, timeTotal } from 'reelscore-sdk/helpers';
 ```
 
-## First migration and compatibility
+reelscore uses its `@reelscore-sdk/*` aliases for these package entry points.
+Models are imported directly; local compatibility re-exports are not required.
 
-The schema preserves the existing reelscore fixture contract, including:
+## Contract preservation
 
-- numeric or string fixture IDs;
-- required, nullable scores;
-- optional `prediction`, `evaluations` and `league.standings` fields;
-- the existing `qoute` spelling and prediction enum values;
-- Unix timestamps in seconds;
-- open string status codes, matching the existing `string[]` status declarations.
+The migration follows reelscore's existing declarations, including required and
+nullable fields, mixed string/number IDs, Unix seconds, `qoute`, provider spelling
+such as `appearences` and `commited`, open string status groups, nullable standings
+form/description and the existing single-entry `TeamCoachDTO.career` tuple.
+No runtime parsers, field renaming or additional application constraints are added.
 
-Only fixture-related supporting types move with this contract. Other models and
-application-specific state remain in their owning repositories. The existing
-reelscore model barrels re-export the generated types during migration.
+OpenAPI describes `Date` fields as serialized date-time strings. The
+`x-typescript-type: Date` marker preserves existing TypeScript `Date` declarations
+through the generator's [documented transform API](https://openapi-ts.dev/node).
+This generates types only; it does not parse incoming JSON into Date instances.
+Unmarked existing strings remain strings.
 
-Controller differences found during comparison: `FixtureLeague.standings` is
-required there; its event model has non-null extra time and assists, no
-`EventTeam.goals`, and a different detail union. The SDK currently follows
-reelscore. The controller needs a separate reviewed migration and validation of
-its persisted event data; it has not been switched to this package.
+OpenAPI has no TypeScript payload generics. The operation and provider envelopes
+use `x-typescript-generic-array` to preserve `OperationResponse<T>` and
+`RapidDTO<T>` in generated TypeScript aliases. Concrete schemas inline their
+payload types for validation and other languages. Numeric-key records similarly
+retain their TypeScript key type with `x-typescript-key-type`.
+
+## Controller follow-up
+
+The separately maintained reelscore-controller has been compared but is not
+migrated by this change. Its event contract differs: extra time and assist values
+are non-null, `EventTeam` has no `goals`, and substitution details use brackets.
+`FixtureLeague.standings` is required there; standings form and description are
+non-null. Coach declarations still use boxed `String`/`Number` types whereas
+reelscore uses primitives. These differences require a reviewed controller
+migration and persisted-payload validation.
+
+Controller-only database, cron, lineup and provider models remain in that
+repository. The controller has additional provider models and different file
+organization, so replacing its entire model tree automatically is inappropriate.
 
 ## Swift models
 
-The OpenAPI file is language-independent and is included in the npm tarball
-(`reelscore-sdk/openapi/fixtures`). A future pinned Swift generator can consume
-this same file directly from a versioned SDK checkout or extracted artifact.
-The iOS app does not run or import the npm package itself.
+The package exports the generated standalone document as `reelscore-sdk/openapi`.
+Source entry points and individual domain files are also available under
+`reelscore-sdk/openapi/<domain>`. A pinned Swift generator can consume the bundled
+JSON from a versioned checkout or an extracted npm artifact.
 
-Generate Swift data models from this source and verify decoding against shared
-JSON examples. Optional versus nullable values, mixed string/number IDs and Unix
-seconds need explicit compatibility checks. TypeScript helpers are executable
-JavaScript and do not become Swift implementations through model generation.
-Swift generation and integration are intentionally a separate next step.
+Verify Swift decoding against shared JSON payloads, especially optional versus
+nullable values, mixed string/number IDs, Date serialization and Unix seconds.
+TypeScript helpers do not become Swift implementations through model generation.
+Swift generation and integration remain a separate step.

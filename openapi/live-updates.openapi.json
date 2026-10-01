@@ -1,0 +1,120 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore live-updates contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "LiveFixtureUpdateDTO": {
+        "type": "object",
+        "properties": {
+          "fixtureId": {
+            "$ref": "./fixtures.openapi.json#/components/schemas/FixtureId"
+          },
+          "operation": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "$ref": "./common.openapi.json#/components/schemas/OperationStatus"
+              },
+              "time": {
+                "type": "string",
+                "format": "date-time",
+                "x-typescript-type": "Date"
+              },
+              "documents": {
+                "type": "array",
+                "items": {
+                  "$ref": "./fixtures.openapi.json#/components/schemas/FixtureDTO"
+                }
+              },
+              "errors": {
+                "$ref": "./common.openapi.json#/components/schemas/OperationError"
+              }
+            },
+            "required": [
+              "status",
+              "time",
+              "documents",
+              "errors"
+            ]
+          }
+        },
+        "required": [
+          "fixtureId",
+          "operation"
+        ]
+      },
+      "LiveFixturesUpdateDTO": {
+        "type": "object",
+        "properties": {
+          "updates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LiveFixtureUpdateDTO"
+            }
+          }
+        },
+        "required": [
+          "updates"
+        ]
+      },
+      "LiveFixtureEventsUpdateDTO": {
+        "type": "object",
+        "properties": {
+          "fixtureId": {
+            "$ref": "./fixtures.openapi.json#/components/schemas/FixtureId"
+          },
+          "operation": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "$ref": "./common.openapi.json#/components/schemas/OperationStatus"
+              },
+              "time": {
+                "type": "string",
+                "format": "date-time",
+                "x-typescript-type": "Date"
+              },
+              "documents": {
+                "type": "array",
+                "items": {
+                  "$ref": "./provider-responses.openapi.json#/components/schemas/RapidEventsDTO"
+                }
+              },
+              "errors": {
+                "$ref": "./common.openapi.json#/components/schemas/OperationError"
+              }
+            },
+            "required": [
+              "status",
+              "time",
+              "documents",
+              "errors"
+            ]
+          }
+        },
+        "required": [
+          "fixtureId",
+          "operation"
+        ]
+      },
+      "LiveFixtureEventsBatchUpdateDTO": {
+        "type": "object",
+        "properties": {
+          "updates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LiveFixtureEventsUpdateDTO"
+            }
+          }
+        },
+        "required": [
+          "updates"
+        ]
+      }
+    }
+  }
+}

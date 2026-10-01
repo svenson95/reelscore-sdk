@@ -1,0 +1,265 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore competitions contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "CompetitionId": {
+        "type": "number"
+      },
+      "CompetitionName": {
+        "type": "string"
+      },
+      "CompetitionSeason": {
+        "type": "number"
+      },
+      "CompetitionRound": {
+        "type": "string"
+      },
+      "LeagueType": {
+        "type": "string",
+        "enum": [
+          "League",
+          "Cup",
+          "Friendly",
+          "International"
+        ]
+      },
+      "CompetitionUrl": {
+        "type": "string"
+      },
+      "CompetitionNameTranslated": {
+        "type": "string"
+      },
+      "CompetitionRoundTranslated": {
+        "type": "string"
+      },
+      "CompetitionRoundIndex": {
+        "type": "number"
+      },
+      "CompetitionRounds": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/CompetitionRound"
+        },
+        "x-typescript-key-type": "number"
+      },
+      "CompetitionRoundsData": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/CompetitionRounds"
+        },
+        "x-typescript-key-type": "number"
+      },
+      "CompetitionRoundsSeasons": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/CompetitionRoundsData"
+        },
+        "x-typescript-key-type": "number"
+      },
+      "LeagueBase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/CompetitionId"
+          },
+          "name": {
+            "$ref": "#/components/schemas/CompetitionName"
+          },
+          "country": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "flag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "season": {
+            "$ref": "#/components/schemas/CompetitionSeason"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "country",
+          "logo",
+          "flag",
+          "season"
+        ]
+      },
+      "CompetitionLeague": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/CompetitionId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/LeagueType"
+          },
+          "logo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "logo"
+        ]
+      },
+      "Country": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "flag": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "code",
+          "flag"
+        ]
+      },
+      "CoverageFixtures": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "boolean"
+          },
+          "lineups": {
+            "type": "boolean"
+          },
+          "statistics_fixtures": {
+            "type": "boolean"
+          },
+          "statistics_players": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "events",
+          "lineups",
+          "statistics_fixtures",
+          "statistics_players"
+        ]
+      },
+      "SeasonCoverage": {
+        "type": "object",
+        "properties": {
+          "fixtures": {
+            "$ref": "#/components/schemas/CoverageFixtures"
+          },
+          "standings": {
+            "type": "boolean"
+          },
+          "players": {
+            "type": "boolean"
+          },
+          "top_scorers": {
+            "type": "boolean"
+          },
+          "top_assists": {
+            "type": "boolean"
+          },
+          "top_cards": {
+            "type": "boolean"
+          },
+          "injuries": {
+            "type": "boolean"
+          },
+          "predictions": {
+            "type": "boolean"
+          },
+          "odds": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "fixtures",
+          "standings",
+          "players",
+          "top_scorers",
+          "top_assists",
+          "top_cards",
+          "injuries",
+          "predictions",
+          "odds"
+        ]
+      },
+      "Season": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "number"
+          },
+          "start": {
+            "type": "string"
+          },
+          "end": {
+            "type": "string"
+          },
+          "current": {
+            "type": "boolean"
+          },
+          "coverage": {
+            "$ref": "#/components/schemas/SeasonCoverage"
+          }
+        },
+        "required": [
+          "year",
+          "start",
+          "end",
+          "current",
+          "coverage"
+        ]
+      },
+      "CompetitionDTO": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "./common.openapi.json#/components/schemas/MongoDbId"
+          },
+          "league": {
+            "$ref": "#/components/schemas/CompetitionLeague"
+          },
+          "country": {
+            "$ref": "#/components/schemas/Country"
+          },
+          "seasons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Season"
+            }
+          }
+        },
+        "required": [
+          "_id",
+          "league",
+          "country",
+          "seasons"
+        ]
+      }
+    }
+  }
+}

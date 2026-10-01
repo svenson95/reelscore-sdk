@@ -1,0 +1,702 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore players contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "PlayerId": {
+        "type": "number"
+      },
+      "PlayerName": {
+        "type": "string"
+      },
+      "GoalScorers": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/PlayerName"
+        }
+      },
+      "PlayerBirth": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "place": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "place",
+          "country"
+        ]
+      },
+      "PlayerDetails": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number"
+          },
+          "birth": {
+            "$ref": "#/components/schemas/PlayerBirth"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "height": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "string"
+          },
+          "injured": {
+            "type": "boolean"
+          },
+          "photo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "firstname",
+          "lastname",
+          "age",
+          "birth",
+          "nationality",
+          "height",
+          "weight",
+          "injured",
+          "photo"
+        ]
+      },
+      "TopScorer": {
+        "type": "object",
+        "properties": {
+          "player": {
+            "$ref": "#/components/schemas/PlayerDetails"
+          },
+          "statistics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlayerStatistic"
+            }
+          }
+        },
+        "required": [
+          "player",
+          "statistics"
+        ]
+      },
+      "PlayerStatistic": {
+        "type": "object",
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/StatisticTeam"
+          },
+          "league": {
+            "$ref": "#/components/schemas/StatisticLeague"
+          },
+          "games": {
+            "$ref": "#/components/schemas/StatisticGames"
+          },
+          "substitutes": {
+            "$ref": "#/components/schemas/StatisticSubstitutes"
+          },
+          "shots": {
+            "$ref": "#/components/schemas/StatisticShots"
+          },
+          "goals": {
+            "$ref": "#/components/schemas/StatisticGoals"
+          },
+          "passes": {
+            "$ref": "#/components/schemas/StatisticPasses"
+          },
+          "tackles": {
+            "$ref": "#/components/schemas/StatisticTackles"
+          },
+          "duels": {
+            "$ref": "#/components/schemas/StatisticDuels"
+          },
+          "dribbles": {
+            "$ref": "#/components/schemas/StatisticDribbles"
+          },
+          "fouls": {
+            "$ref": "#/components/schemas/StatisticFouls"
+          },
+          "cards": {
+            "$ref": "#/components/schemas/StatisticCards"
+          },
+          "penalty": {
+            "$ref": "#/components/schemas/StatisticPenalty"
+          }
+        },
+        "required": [
+          "team",
+          "league",
+          "games",
+          "substitutes",
+          "shots",
+          "goals",
+          "passes",
+          "tackles",
+          "duels",
+          "dribbles",
+          "fouls",
+          "cards",
+          "penalty"
+        ]
+      },
+      "StatisticTeam": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "logo"
+        ]
+      },
+      "StatisticLeague": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "flag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "season": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "country",
+          "logo",
+          "flag",
+          "season"
+        ]
+      },
+      "StatisticGames": {
+        "type": "object",
+        "properties": {
+          "appearences": {
+            "type": "number"
+          },
+          "lineups": {
+            "type": "number"
+          },
+          "minutes": {
+            "type": "number"
+          },
+          "number": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "position": {
+            "type": "string"
+          },
+          "rating": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "captain": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "appearences",
+          "lineups",
+          "minutes",
+          "number",
+          "position",
+          "rating",
+          "captain"
+        ]
+      },
+      "StatisticSubstitutes": {
+        "type": "object",
+        "properties": {
+          "in": {
+            "type": "number"
+          },
+          "out": {
+            "type": "number"
+          },
+          "bench": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "in",
+          "out",
+          "bench"
+        ]
+      },
+      "StatisticShots": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "on": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "total",
+          "on"
+        ]
+      },
+      "StatisticGoals": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "conceded": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "assists": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "saves": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "total",
+          "conceded",
+          "assists",
+          "saves"
+        ]
+      },
+      "StatisticPasses": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "key": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accuracy": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "total",
+          "key",
+          "accuracy"
+        ]
+      },
+      "StatisticTackles": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "blocks": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "interceptions": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "total",
+          "blocks",
+          "interceptions"
+        ]
+      },
+      "StatisticDuels": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "won": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "total",
+          "won"
+        ]
+      },
+      "StatisticDribbles": {
+        "type": "object",
+        "properties": {
+          "attempts": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "success": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "past": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "attempts",
+          "success",
+          "past"
+        ]
+      },
+      "StatisticFouls": {
+        "type": "object",
+        "properties": {
+          "drawn": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "committed": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "drawn",
+          "committed"
+        ]
+      },
+      "StatisticCards": {
+        "type": "object",
+        "properties": {
+          "yellow": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "yellowred": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "red": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "yellow",
+          "yellowred",
+          "red"
+        ]
+      },
+      "StatisticPenalty": {
+        "type": "object",
+        "properties": {
+          "won": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "commited": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "scored": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "missed": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "saved": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "won",
+          "commited",
+          "scored",
+          "missed",
+          "saved"
+        ]
+      },
+      "TopScorersDTO": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "./common.openapi.json#/components/schemas/MongoDbId"
+          },
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "league": {
+                "type": "string"
+              },
+              "season": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "league",
+              "season"
+            ]
+          },
+          "response": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopScorer"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "x-typescript-type": "Date"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "x-typescript-type": "Date"
+          }
+        },
+        "required": [
+          "_id",
+          "parameters",
+          "response",
+          "createdAt",
+          "updatedAt"
+        ]
+      }
+    }
+  }
+}

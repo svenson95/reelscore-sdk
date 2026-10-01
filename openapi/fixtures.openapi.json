@@ -1,254 +1,31 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "reelscore fixture contracts",
-    "version": "0.1.0",
-    "description": "Shared data contracts. This first migration describes models only; it does not introduce HTTP endpoints."
+    "title": "reelscore fixtures contracts",
+    "version": "0.2.0"
   },
   "paths": {},
   "components": {
     "schemas": {
-      "MongoDbId": {
-        "type": "string"
-      },
-      "TeamId": {
-        "type": "number"
-      },
-      "TeamName": {
-        "type": "string"
-      },
-      "TeamLogo": {
-        "type": "string"
-      },
-      "PlayerId": {
-        "type": "number"
-      },
-      "PlayerName": {
-        "type": "string"
-      },
-      "CompetitionId": {
-        "type": "number"
-      },
-      "CompetitionName": {
-        "type": "string"
-      },
-      "CompetitionSeason": {
-        "type": "number"
-      },
-      "CompetitionRound": {
-        "type": "string"
-      },
-      "Team": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TeamId"
-          },
-          "name": {
-            "$ref": "#/components/schemas/TeamName"
-          },
-          "logo": {
-            "$ref": "#/components/schemas/TeamLogo"
-          }
-        },
-        "required": ["id", "name", "logo"]
-      },
       "FixtureLeague": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/CompetitionId"
+        "allOf": [
+          {
+            "$ref": "./competitions.openapi.json#/components/schemas/LeagueBase"
           },
-          "name": {
-            "$ref": "#/components/schemas/CompetitionName"
-          },
-          "country": {
-            "type": "string"
-          },
-          "logo": {
-            "type": "string"
-          },
-          "flag": {
-            "type": ["string", "null"]
-          },
-          "season": {
-            "$ref": "#/components/schemas/CompetitionSeason"
-          },
-          "standings": {
-            "type": "boolean"
-          },
-          "round": {
-            "$ref": "#/components/schemas/CompetitionRound"
-          }
-        },
-        "required": ["id", "name", "country", "logo", "flag", "season", "round"]
-      },
-      "StatusLong": {
-        "type": "string",
-        "enum": [
-          "Time To Be Defined",
-          "Not Started",
-          "First Half, Kick Off",
-          "Halftime",
-          "Second Half, 2nd Half Started",
-          "Extra Time",
-          "Break Time",
-          "Penalty in Progress",
-          "Match Suspended",
-          "Match Interrupted",
-          "Match Finished",
-          "Match Postponed",
-          "Match Cancelled",
-          "Match Abandoned",
-          "Technical Loss",
-          "WalkOver",
-          "In Progress"
-        ]
-      },
-      "StatusShort": {
-        "type": "string",
-        "description": "Kept open for compatibility: the existing status arrays are typed as string[], so StatusShort currently accepts any string. Narrowing to an enum is a separate contract change."
-      },
-      "EventTime": {
-        "type": "object",
-        "properties": {
-          "elapsed": {
-            "type": "number"
-          },
-          "extra": {
-            "type": ["number", "null"]
-          }
-        },
-        "required": ["elapsed", "extra"]
-      },
-      "EventTeam": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "name": {
-            "type": "string"
-          },
-          "logo": {
-            "type": "string"
-          },
-          "goals": {
-            "type": "number"
-          }
-        },
-        "required": ["id", "name", "logo", "goals"]
-      },
-      "EventPlayer": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/PlayerId"
-          },
-          "name": {
-            "$ref": "#/components/schemas/PlayerName"
-          }
-        },
-        "required": ["id", "name"]
-      },
-      "EventAssist": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PlayerId"
+          {
+            "type": "object",
+            "properties": {
+              "standings": {
+                "type": "boolean"
               },
-              {
-                "type": "null"
+              "round": {
+                "$ref": "./competitions.openapi.json#/components/schemas/CompetitionRound"
               }
-            ]
-          },
-          "name": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PlayerName"
-              },
-              {
-                "type": "null"
-              }
+            },
+            "required": [
+              "round"
             ]
           }
-        },
-        "required": ["id", "name"]
-      },
-      "EventType": {
-        "type": "string",
-        "enum": ["Goal", "Card", "subst", "Var"]
-      },
-      "EventDetail": {
-        "type": "string",
-        "enum": [
-          "Normal Goal",
-          "Own Goal",
-          "Penalty",
-          "Missed Penalty",
-          "Yellow Card",
-          "Red Card",
-          "Tripping",
-          "Roughing",
-          "Argument",
-          "Holding",
-          "Delay of game",
-          "Elbowing",
-          "Unsportsmanlike conduct",
-          "Serious foul",
-          "Goal cancelled",
-          "Goal Disallowed - handball",
-          "Goal Disallowed - offside",
-          "Diving",
-          "Penalty confirmed",
-          "Substitution",
-          "Substitution 1",
-          "Substitution 2",
-          "Substitution 3",
-          "Substitution 4",
-          "Substitution 5",
-          "Substitution 6",
-          "Substitution 7",
-          "Substitution 8",
-          "Substitution 9",
-          "Substitution 10"
-        ]
-      },
-      "EventDTO": {
-        "type": "object",
-        "properties": {
-          "time": {
-            "$ref": "#/components/schemas/EventTime"
-          },
-          "team": {
-            "$ref": "#/components/schemas/EventTeam"
-          },
-          "player": {
-            "$ref": "#/components/schemas/EventPlayer"
-          },
-          "assist": {
-            "$ref": "#/components/schemas/EventAssist"
-          },
-          "type": {
-            "$ref": "#/components/schemas/EventType"
-          },
-          "detail": {
-            "$ref": "#/components/schemas/EventDetail"
-          },
-          "comments": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "time",
-          "team",
-          "player",
-          "assist",
-          "type",
-          "detail",
-          "comments"
         ]
       },
       "FixtureDetail": {
@@ -287,10 +64,10 @@
             "type": "number"
           }
         },
-        "required": ["first", "second"]
-      },
-      "VenueId": {
-        "type": "number"
+        "required": [
+          "first",
+          "second"
+        ]
       },
       "FixtureVenue": {
         "type": "object",
@@ -298,7 +75,7 @@
           "id": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/VenueId"
+                "$ref": "./teams.openapi.json#/components/schemas/VenueId"
               },
               {
                 "type": "null"
@@ -312,29 +89,49 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "city"]
+        "required": [
+          "id",
+          "name",
+          "city"
+        ]
       },
       "FixtureStatus": {
         "type": "object",
         "properties": {
           "long": {
-            "$ref": "#/components/schemas/StatusLong"
+            "$ref": "./fixture-status.openapi.json#/components/schemas/StatusLong"
           },
           "short": {
-            "$ref": "#/components/schemas/StatusShort"
+            "$ref": "./fixture-status.openapi.json#/components/schemas/StatusShort"
           },
           "elapsed": {
-            "type": ["number", "null"]
+            "type": [
+              "number",
+              "null"
+            ]
           },
           "extra": {
-            "type": ["number", "null"]
+            "type": [
+              "number",
+              "null"
+            ]
           }
         },
-        "required": ["long", "short", "elapsed", "extra"]
+        "required": [
+          "long",
+          "short",
+          "elapsed",
+          "extra"
+        ]
       },
       "FixtureResult": {
         "type": "string",
-        "enum": ["NO_RESULT_AVAILABLE", "WIN", "DRAW", "LOSS"]
+        "enum": [
+          "NO_RESULT_AVAILABLE",
+          "WIN",
+          "DRAW",
+          "LOSS"
+        ]
       },
       "Fixture": {
         "type": "object",
@@ -379,7 +176,7 @@
       "FixtureTeam": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/Team"
+            "$ref": "./teams.openapi.json#/components/schemas/Team"
           },
           {
             "type": "object",
@@ -388,7 +185,9 @@
                 "type": "boolean"
               }
             },
-            "required": ["winner"]
+            "required": [
+              "winner"
+            ]
           }
         ]
       },
@@ -402,19 +201,31 @@
             "$ref": "#/components/schemas/FixtureTeam"
           }
         },
-        "required": ["home", "away"]
+        "required": [
+          "home",
+          "away"
+        ]
       },
       "Goals": {
         "type": "object",
         "properties": {
           "home": {
-            "type": ["number", "null"]
+            "type": [
+              "number",
+              "null"
+            ]
           },
           "away": {
-            "type": ["number", "null"]
+            "type": [
+              "number",
+              "null"
+            ]
           }
         },
-        "required": ["home", "away"]
+        "required": [
+          "home",
+          "away"
+        ]
       },
       "Score": {
         "type": "object",
@@ -432,7 +243,12 @@
             "$ref": "#/components/schemas/Goals"
           }
         },
-        "required": ["halftime", "fulltime", "extratime", "penalty"]
+        "required": [
+          "halftime",
+          "fulltime",
+          "extratime",
+          "penalty"
+        ]
       },
       "FixtureFinal": {
         "type": "object",
@@ -450,7 +266,7 @@
           "winnerOfFinal": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/TeamId"
+                "$ref": "./teams.openapi.json#/components/schemas/TeamId"
               },
               {
                 "type": "null"
@@ -458,13 +274,16 @@
             ]
           }
         },
-        "required": ["firstLegResult", "winnerOfFinal"]
+        "required": [
+          "firstLegResult",
+          "winnerOfFinal"
+        ]
       },
       "FixtureDTO": {
         "type": "object",
         "properties": {
           "_id": {
-            "$ref": "#/components/schemas/MongoDbId"
+            "$ref": "./common.openapi.json#/components/schemas/MongoDbId"
           },
           "fixture": {
             "$ref": "#/components/schemas/Fixture"
@@ -482,7 +301,14 @@
             "$ref": "#/components/schemas/Score"
           }
         },
-        "required": ["_id", "fixture", "league", "teams", "goals", "score"]
+        "required": [
+          "_id",
+          "fixture",
+          "league",
+          "teams",
+          "goals",
+          "score"
+        ]
       },
       "ExtendedFixtureDTO": {
         "allOf": [
@@ -499,21 +325,36 @@
                 "$ref": "#/components/schemas/FixturePrediction"
               },
               "evaluations": {
-                "$ref": "#/components/schemas/FixtureEvaluations"
+                "$ref": "./evaluations.openapi.json#/components/schemas/FixtureEvaluations"
               }
             },
-            "required": ["final"]
+            "required": [
+              "final"
+            ]
           }
         ]
       },
       "PredictionProbability": {
         "type": "number",
-        "enum": [0.75, 0.8, 0.85, 0.9, 0.95],
+        "enum": [
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95
+        ],
         "x-typescript-constant": "PREDICTION_PROBABILITIES"
       },
       "PredictionCorrectValue": {
-        "type": ["boolean", "null"],
-        "enum": [null, false, true],
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "enum": [
+          null,
+          false,
+          true
+        ],
         "x-typescript-constant": "PREDICTION_CORRECT_VALUES"
       },
       "FixturePrediction": {
@@ -533,78 +374,12 @@
             "$ref": "#/components/schemas/PredictionCorrectValue"
           }
         },
-        "required": ["bet", "qoute", "probability", "correct"]
-      },
-      "AnalysisLevel": {
-        "type": "string",
-        "enum": ["LUCKY", "UNLUCKY"]
-      },
-      "AnalysisType": {
-        "type": "string",
-        "enum": [
-          "GOAL",
-          "NO_GOAL",
-          "LAST_MINUTE_GOAL",
-          "NO_FOUL",
-          "PENALTY",
-          "NO_PENALTY",
-          "RED_CARD",
-          "NO_RED_CARD",
-          "KEY_PLAYER_INJURY",
-          "KEY_PLAYER_YELLOW_CARD_SUSPENSION"
+        "required": [
+          "bet",
+          "qoute",
+          "probability",
+          "correct"
         ]
-      },
-      "EvaluationAnalyses": {
-        "type": "object",
-        "properties": {
-          "level": {
-            "$ref": "#/components/schemas/AnalysisLevel"
-          },
-          "type": {
-            "$ref": "#/components/schemas/AnalysisType"
-          },
-          "minute": {
-            "type": ["number", "null"]
-          },
-          "player": {
-            "type": ["string", "null"]
-          },
-          "comments": {
-            "type": ["string", "null"]
-          }
-        },
-        "required": ["level", "type", "minute", "player", "comments"]
-      },
-      "EvaluationPerformance": {
-        "type": "string",
-        "enum": ["LOW", "MIDDLE", "HIGH"]
-      },
-      "FixtureEvaluation": {
-        "type": "object",
-        "properties": {
-          "performance": {
-            "$ref": "#/components/schemas/EvaluationPerformance"
-          },
-          "analyses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluationAnalyses"
-            }
-          }
-        },
-        "required": ["performance", "analyses"]
-      },
-      "FixtureEvaluations": {
-        "type": "object",
-        "properties": {
-          "home": {
-            "$ref": "#/components/schemas/FixtureEvaluation"
-          },
-          "away": {
-            "$ref": "#/components/schemas/FixtureEvaluation"
-          }
-        },
-        "required": ["home", "away"]
       },
       "LatestFixturesDTO": {
         "type": "object",
@@ -622,12 +397,15 @@
             }
           }
         },
-        "required": ["home", "away"]
+        "required": [
+          "home",
+          "away"
+        ]
       },
       "FixtureHighlights": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/EventDTO"
+          "$ref": "./events.openapi.json#/components/schemas/EventDTO"
         }
       },
       "GetFixtureDTO": {
@@ -640,7 +418,10 @@
             "$ref": "#/components/schemas/FixtureHighlights"
           }
         },
-        "required": ["data", "highlights"]
+        "required": [
+          "data",
+          "highlights"
+        ]
       }
     }
   }

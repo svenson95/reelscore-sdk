@@ -28,3 +28,27 @@ test('ES modules and CommonJS expose the same package contract', () => {
   assert.deepEqual(PREDICTION_PROBABILITIES, [0.75, 0.8, 0.85, 0.9, 0.95]);
   assert.deepEqual(PREDICTION_CORRECT_VALUES, [null, false, true]);
 });
+
+test('status constants, realtime event names and event helpers survive both entry points', async () => {
+  const constants = await import('reelscore-sdk/constants');
+  const helpers = await import('reelscore-sdk/helpers');
+  const commonJsConstants = require('reelscore-sdk/constants');
+  const commonJsHelpers = require('reelscore-sdk/helpers');
+
+  assert.deepEqual(constants.STATUS_TYPES_FINISHED, ['FT', 'AET', 'PEN']);
+  assert.deepEqual(constants.REALTIME_EVENT, {
+    FIXTURES_UPDATED: 'fixtures.updated',
+    FIXTURE_EVENTS_UPDATED: 'fixture.eventsUpdated',
+  });
+  assert.deepEqual(commonJsConstants.REALTIME_EVENT, constants.REALTIME_EVENT);
+  assert.equal(helpers.timeTotal({ time: { elapsed: 90, extra: 4 } }), 94);
+  assert.equal(
+    commonJsHelpers.timeTotal({ time: { elapsed: 90, extra: null } }),
+    90
+  );
+  assert.ok(
+    require
+      .resolve('reelscore-sdk/openapi')
+      .endsWith('reelscore.bundled.openapi.json')
+  );
+});

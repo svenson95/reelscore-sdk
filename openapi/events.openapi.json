@@ -1,0 +1,269 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore events contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "EventTime": {
+        "type": "object",
+        "properties": {
+          "elapsed": {
+            "type": "number"
+          },
+          "extra": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "elapsed",
+          "extra"
+        ]
+      },
+      "EventTeam": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "goals": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "logo",
+          "goals"
+        ]
+      },
+      "EventPlayer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "./players.openapi.json#/components/schemas/PlayerId"
+          },
+          "name": {
+            "$ref": "./players.openapi.json#/components/schemas/PlayerName"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "EventAssist": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "$ref": "./players.openapi.json#/components/schemas/PlayerId"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "$ref": "./players.openapi.json#/components/schemas/PlayerName"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "EventType": {
+        "type": "string",
+        "enum": [
+          "Goal",
+          "Card",
+          "subst",
+          "Var"
+        ]
+      },
+      "EventDetail": {
+        "type": "string",
+        "enum": [
+          "Normal Goal",
+          "Own Goal",
+          "Penalty",
+          "Missed Penalty",
+          "Yellow Card",
+          "Red Card",
+          "Tripping",
+          "Roughing",
+          "Argument",
+          "Holding",
+          "Delay of game",
+          "Elbowing",
+          "Unsportsmanlike conduct",
+          "Serious foul",
+          "Goal cancelled",
+          "Goal Disallowed - handball",
+          "Goal Disallowed - offside",
+          "Diving",
+          "Penalty confirmed",
+          "Substitution",
+          "Substitution 1",
+          "Substitution 2",
+          "Substitution 3",
+          "Substitution 4",
+          "Substitution 5",
+          "Substitution 6",
+          "Substitution 7",
+          "Substitution 8",
+          "Substitution 9",
+          "Substitution 10"
+        ]
+      },
+      "EventDTO": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "$ref": "#/components/schemas/EventTime"
+          },
+          "team": {
+            "$ref": "#/components/schemas/EventTeam"
+          },
+          "player": {
+            "$ref": "#/components/schemas/EventPlayer"
+          },
+          "assist": {
+            "$ref": "#/components/schemas/EventAssist"
+          },
+          "type": {
+            "$ref": "#/components/schemas/EventType"
+          },
+          "detail": {
+            "$ref": "#/components/schemas/EventDetail"
+          },
+          "comments": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "time",
+          "team",
+          "player",
+          "assist",
+          "type",
+          "detail",
+          "comments"
+        ]
+      },
+      "EventResult": {
+        "type": "object",
+        "properties": {
+          "home": {
+            "type": "number"
+          },
+          "away": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "home",
+          "away"
+        ]
+      },
+      "EventWithResult": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EventDTO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "result": {
+                "$ref": "#/components/schemas/EventResult"
+              }
+            },
+            "required": [
+              "result"
+            ]
+          }
+        ]
+      },
+      "HighlightEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EventWithResult"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "event"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        ]
+      },
+      "HighlightItem": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/HighlightEvent"
+          },
+          {
+            "$ref": "#/components/schemas/HighlightSpacer"
+          }
+        ]
+      },
+      "HighlightSpacer": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "spacer"
+            ]
+          },
+          "type": {
+            "$ref": "#/components/schemas/HighlightSpacerType"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "type",
+          "label"
+        ]
+      },
+      "HighlightSpacerType": {
+        "type": "string",
+        "enum": [
+          "halftime",
+          "penalty-shootout"
+        ]
+      }
+    }
+  }
+}

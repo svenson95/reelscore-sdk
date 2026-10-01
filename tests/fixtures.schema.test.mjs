@@ -1,14 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
-import Ajv2020 from 'ajv/dist/2020.js';
+import { createSchemaValidator } from './schema.testing.mjs';
 
-const document = JSON.parse(
-  await readFile(
-    new URL('../openapi/fixtures.openapi.json', import.meta.url),
-    'utf8'
-  )
-);
 const fixture = JSON.parse(
   await readFile(
     new URL('./fixtures/extended-fixture.json', import.meta.url),
@@ -16,23 +10,8 @@ const fixture = JSON.parse(
   )
 );
 
-// OpenAPI component references become standard JSON Schema definitions for Ajv.
-const definitions = JSON.parse(
-  JSON.stringify(document.components.schemas).replaceAll(
-    '#/components/schemas/',
-    '#/$defs/'
-  )
-);
-const validator = new Ajv2020({ allErrors: true });
-validator.addKeyword('x-typescript-constant');
-const validateFixture = validator.compile({
-  $defs: definitions,
-  $ref: '#/$defs/ExtendedFixtureDTO',
-});
-const validateResponse = validator.compile({
-  $defs: definitions,
-  $ref: '#/$defs/GetFixtureDTO',
-});
+const validateFixture = createSchemaValidator('ExtendedFixtureDTO');
+const validateResponse = createSchemaValidator('GetFixtureDTO');
 
 test('the existing match payload permits missing predictions and nullable scores', () => {
   assert.equal(

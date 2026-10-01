@@ -1,0 +1,162 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore teams contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "TeamId": {
+        "type": "number"
+      },
+      "TeamName": {
+        "type": "string"
+      },
+      "TeamLogo": {
+        "type": "string"
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TeamId"
+          },
+          "name": {
+            "$ref": "#/components/schemas/TeamName"
+          },
+          "logo": {
+            "$ref": "#/components/schemas/TeamLogo"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "logo"
+        ]
+      },
+      "VenueId": {
+        "type": "number"
+      },
+      "TeamDTO": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "./common.openapi.json#/components/schemas/MongoDbId"
+          },
+          "team": {
+            "$ref": "#/components/schemas/TeamDetails"
+          },
+          "venue": {
+            "$ref": "#/components/schemas/TeamVenue"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "x-typescript-type": "Date"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "x-typescript-type": "Date"
+          }
+        },
+        "required": [
+          "_id",
+          "team",
+          "venue",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "TeamDetails": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TeamId"
+          },
+          "name": {
+            "$ref": "#/components/schemas/TeamName"
+          },
+          "code": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "founded": {
+            "type": "number"
+          },
+          "national": {
+            "type": "boolean"
+          },
+          "logo": {
+            "$ref": "#/components/schemas/TeamLogo"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "code",
+          "country",
+          "founded",
+          "national",
+          "logo"
+        ]
+      },
+      "TeamVenue": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/VenueId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "capacity": {
+            "type": "number"
+          },
+          "surface": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "address",
+          "city",
+          "capacity",
+          "surface",
+          "image"
+        ]
+      },
+      "GetAllTeamsDTO": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamDTO"
+            }
+          },
+          "length": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "length"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,459 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore shared contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "MongoDbId": {
+        "$ref": "./common.openapi.json#/components/schemas/MongoDbId"
+      },
+      "TeamId": {
+        "$ref": "./teams.openapi.json#/components/schemas/TeamId"
+      },
+      "TeamName": {
+        "$ref": "./teams.openapi.json#/components/schemas/TeamName"
+      },
+      "TeamLogo": {
+        "$ref": "./teams.openapi.json#/components/schemas/TeamLogo"
+      },
+      "PlayerId": {
+        "$ref": "./players.openapi.json#/components/schemas/PlayerId"
+      },
+      "PlayerName": {
+        "$ref": "./players.openapi.json#/components/schemas/PlayerName"
+      },
+      "CompetitionId": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionId"
+      },
+      "CompetitionName": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionName"
+      },
+      "CompetitionSeason": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionSeason"
+      },
+      "CompetitionRound": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionRound"
+      },
+      "Team": {
+        "$ref": "./teams.openapi.json#/components/schemas/Team"
+      },
+      "FixtureLeague": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureLeague"
+      },
+      "StatusLong": {
+        "$ref": "./fixture-status.openapi.json#/components/schemas/StatusLong"
+      },
+      "StatusShort": {
+        "$ref": "./fixture-status.openapi.json#/components/schemas/StatusShort"
+      },
+      "EventTime": {
+        "$ref": "./events.openapi.json#/components/schemas/EventTime"
+      },
+      "EventTeam": {
+        "$ref": "./events.openapi.json#/components/schemas/EventTeam"
+      },
+      "EventPlayer": {
+        "$ref": "./events.openapi.json#/components/schemas/EventPlayer"
+      },
+      "EventAssist": {
+        "$ref": "./events.openapi.json#/components/schemas/EventAssist"
+      },
+      "EventType": {
+        "$ref": "./events.openapi.json#/components/schemas/EventType"
+      },
+      "EventDetail": {
+        "$ref": "./events.openapi.json#/components/schemas/EventDetail"
+      },
+      "EventDTO": {
+        "$ref": "./events.openapi.json#/components/schemas/EventDTO"
+      },
+      "FixtureDetail": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureDetail"
+      },
+      "FixtureId": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureId"
+      },
+      "FixtureIdParameter": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureIdParameter"
+      },
+      "FixtureDateString": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureDateString"
+      },
+      "FixturePeriods": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixturePeriods"
+      },
+      "VenueId": {
+        "$ref": "./teams.openapi.json#/components/schemas/VenueId"
+      },
+      "FixtureVenue": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureVenue"
+      },
+      "FixtureStatus": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureStatus"
+      },
+      "FixtureResult": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureResult"
+      },
+      "Fixture": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/Fixture"
+      },
+      "FixtureTeam": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureTeam"
+      },
+      "MatchTeams": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/MatchTeams"
+      },
+      "Goals": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/Goals"
+      },
+      "Score": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/Score"
+      },
+      "FixtureFinal": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureFinal"
+      },
+      "FixtureDTO": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureDTO"
+      },
+      "ExtendedFixtureDTO": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/ExtendedFixtureDTO"
+      },
+      "PredictionProbability": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/PredictionProbability"
+      },
+      "PredictionCorrectValue": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/PredictionCorrectValue"
+      },
+      "FixturePrediction": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixturePrediction"
+      },
+      "AnalysisLevel": {
+        "$ref": "./evaluations.openapi.json#/components/schemas/AnalysisLevel"
+      },
+      "AnalysisType": {
+        "$ref": "./evaluations.openapi.json#/components/schemas/AnalysisType"
+      },
+      "EvaluationAnalyses": {
+        "$ref": "./evaluations.openapi.json#/components/schemas/EvaluationAnalyses"
+      },
+      "EvaluationPerformance": {
+        "$ref": "./evaluations.openapi.json#/components/schemas/EvaluationPerformance"
+      },
+      "FixtureEvaluation": {
+        "$ref": "./evaluations.openapi.json#/components/schemas/FixtureEvaluation"
+      },
+      "FixtureEvaluations": {
+        "$ref": "./evaluations.openapi.json#/components/schemas/FixtureEvaluations"
+      },
+      "LatestFixturesDTO": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/LatestFixturesDTO"
+      },
+      "FixtureHighlights": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/FixtureHighlights"
+      },
+      "GetFixtureDTO": {
+        "$ref": "./fixtures.openapi.json#/components/schemas/GetFixtureDTO"
+      },
+      "OperationStatus": {
+        "$ref": "./common.openapi.json#/components/schemas/OperationStatus"
+      },
+      "OperationError": {
+        "$ref": "./common.openapi.json#/components/schemas/OperationError"
+      },
+      "OperationResponse": {
+        "$ref": "./common.openapi.json#/components/schemas/OperationResponse"
+      },
+      "SearchType": {
+        "$ref": "./search.openapi.json#/components/schemas/SearchType"
+      },
+      "FixtureSearchResult": {
+        "$ref": "./search.openapi.json#/components/schemas/FixtureSearchResult"
+      },
+      "CompetitionSearchResult": {
+        "$ref": "./search.openapi.json#/components/schemas/CompetitionSearchResult"
+      },
+      "TeamSearchResult": {
+        "$ref": "./search.openapi.json#/components/schemas/TeamSearchResult"
+      },
+      "TeamDTO": {
+        "$ref": "./teams.openapi.json#/components/schemas/TeamDTO"
+      },
+      "TeamDetails": {
+        "$ref": "./teams.openapi.json#/components/schemas/TeamDetails"
+      },
+      "TeamVenue": {
+        "$ref": "./teams.openapi.json#/components/schemas/TeamVenue"
+      },
+      "SearchResult": {
+        "$ref": "./search.openapi.json#/components/schemas/SearchResult"
+      },
+      "SearchResultGroup": {
+        "$ref": "./search.openapi.json#/components/schemas/SearchResultGroup"
+      },
+      "BaseParameters": {
+        "$ref": "./provider-responses.openapi.json#/components/schemas/BaseParameters"
+      },
+      "BasePaging": {
+        "$ref": "./provider-responses.openapi.json#/components/schemas/BasePaging"
+      },
+      "RapidDTO": {
+        "$ref": "./provider-responses.openapi.json#/components/schemas/RapidDTO"
+      },
+      "RapidEventsDTO": {
+        "$ref": "./provider-responses.openapi.json#/components/schemas/RapidEventsDTO"
+      },
+      "RapidStatisticsDTO": {
+        "$ref": "./provider-responses.openapi.json#/components/schemas/RapidStatisticsDTO"
+      },
+      "StatisticDTO": {
+        "$ref": "./statistics.openapi.json#/components/schemas/StatisticDTO"
+      },
+      "StatisticsTeamDetails": {
+        "$ref": "./statistics.openapi.json#/components/schemas/StatisticsTeamDetails"
+      },
+      "TeamStatistics": {
+        "$ref": "./statistics.openapi.json#/components/schemas/TeamStatistics"
+      },
+      "StatisticItem": {
+        "$ref": "./statistics.openapi.json#/components/schemas/StatisticItem"
+      },
+      "StatisticItemType": {
+        "$ref": "./statistics.openapi.json#/components/schemas/StatisticItemType"
+      },
+      "StatisticItemValue": {
+        "$ref": "./statistics.openapi.json#/components/schemas/StatisticItemValue"
+      },
+      "StandingsPlayed": {
+        "$ref": "./standings.openapi.json#/components/schemas/StandingsPlayed"
+      },
+      "StandingRanks": {
+        "$ref": "./standings.openapi.json#/components/schemas/StandingRanks"
+      },
+      "LeagueType": {
+        "$ref": "./competitions.openapi.json#/components/schemas/LeagueType"
+      },
+      "CompetitionUrl": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionUrl"
+      },
+      "CompetitionNameTranslated": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionNameTranslated"
+      },
+      "CompetitionRoundTranslated": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionRoundTranslated"
+      },
+      "CompetitionRoundIndex": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionRoundIndex"
+      },
+      "CompetitionRounds": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionRounds"
+      },
+      "CompetitionRoundsData": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionRoundsData"
+      },
+      "CompetitionRoundsSeasons": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionRoundsSeasons"
+      },
+      "StandingsLeague": {
+        "$ref": "./standings.openapi.json#/components/schemas/StandingsLeague"
+      },
+      "LeagueBase": {
+        "$ref": "./competitions.openapi.json#/components/schemas/LeagueBase"
+      },
+      "CompetitionLeague": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionLeague"
+      },
+      "Country": {
+        "$ref": "./competitions.openapi.json#/components/schemas/Country"
+      },
+      "CoverageFixtures": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CoverageFixtures"
+      },
+      "SeasonCoverage": {
+        "$ref": "./competitions.openapi.json#/components/schemas/SeasonCoverage"
+      },
+      "Season": {
+        "$ref": "./competitions.openapi.json#/components/schemas/Season"
+      },
+      "CompetitionDTO": {
+        "$ref": "./competitions.openapi.json#/components/schemas/CompetitionDTO"
+      },
+      "StatusTypeScheduled": {
+        "$ref": "./fixture-status.openapi.json#/components/schemas/StatusTypeScheduled"
+      },
+      "StatusValueHalftime": {
+        "$ref": "./fixture-status.openapi.json#/components/schemas/StatusValueHalftime"
+      },
+      "StatusTypePlaying": {
+        "$ref": "./fixture-status.openapi.json#/components/schemas/StatusTypePlaying"
+      },
+      "StatusTypeFinished": {
+        "$ref": "./fixture-status.openapi.json#/components/schemas/StatusTypeFinished"
+      },
+      "StatusTypePostponed": {
+        "$ref": "./fixture-status.openapi.json#/components/schemas/StatusTypePostponed"
+      },
+      "StatusTypeCancelled": {
+        "$ref": "./fixture-status.openapi.json#/components/schemas/StatusTypeCancelled"
+      },
+      "StatusTypeAbandoned": {
+        "$ref": "./fixture-status.openapi.json#/components/schemas/StatusTypeAbandoned"
+      },
+      "StatusTypeNotPlayed": {
+        "$ref": "./fixture-status.openapi.json#/components/schemas/StatusTypeNotPlayed"
+      },
+      "FixturePlayersWithStreak": {
+        "$ref": "./analyses.openapi.json#/components/schemas/FixturePlayersWithStreak"
+      },
+      "GoalScorers": {
+        "$ref": "./players.openapi.json#/components/schemas/GoalScorers"
+      },
+      "FixtureHomeOrAwayStrong": {
+        "$ref": "./analyses.openapi.json#/components/schemas/FixtureHomeOrAwayStrong"
+      },
+      "AnalysesDTO": {
+        "$ref": "./analyses.openapi.json#/components/schemas/AnalysesDTO"
+      },
+      "StatisticKey": {
+        "$ref": "./statistics.openapi.json#/components/schemas/StatisticKey"
+      },
+      "RequiredStatisticKey": {
+        "$ref": "./statistics.openapi.json#/components/schemas/RequiredStatisticKey"
+      },
+      "OptionalStatisticKey": {
+        "$ref": "./statistics.openapi.json#/components/schemas/OptionalStatisticKey"
+      },
+      "FixturePerformance": {
+        "$ref": "./evaluations.openapi.json#/components/schemas/FixturePerformance"
+      },
+      "EvaluationTeam": {
+        "$ref": "./evaluations.openapi.json#/components/schemas/EvaluationTeam"
+      },
+      "EvaluationTeams": {
+        "$ref": "./evaluations.openapi.json#/components/schemas/EvaluationTeams"
+      },
+      "EvaluationDTO": {
+        "$ref": "./evaluations.openapi.json#/components/schemas/EvaluationDTO"
+      },
+      "EventResult": {
+        "$ref": "./events.openapi.json#/components/schemas/EventResult"
+      },
+      "EventWithResult": {
+        "$ref": "./events.openapi.json#/components/schemas/EventWithResult"
+      },
+      "HighlightEvent": {
+        "$ref": "./events.openapi.json#/components/schemas/HighlightEvent"
+      },
+      "HighlightItem": {
+        "$ref": "./events.openapi.json#/components/schemas/HighlightItem"
+      },
+      "HighlightSpacer": {
+        "$ref": "./events.openapi.json#/components/schemas/HighlightSpacer"
+      },
+      "HighlightSpacerType": {
+        "$ref": "./events.openapi.json#/components/schemas/HighlightSpacerType"
+      },
+      "PlayerBirth": {
+        "$ref": "./players.openapi.json#/components/schemas/PlayerBirth"
+      },
+      "PlayerDetails": {
+        "$ref": "./players.openapi.json#/components/schemas/PlayerDetails"
+      },
+      "TopScorer": {
+        "$ref": "./players.openapi.json#/components/schemas/TopScorer"
+      },
+      "PlayerStatistic": {
+        "$ref": "./players.openapi.json#/components/schemas/PlayerStatistic"
+      },
+      "StatisticTeam": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticTeam"
+      },
+      "StatisticLeague": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticLeague"
+      },
+      "StatisticGames": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticGames"
+      },
+      "StatisticSubstitutes": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticSubstitutes"
+      },
+      "StatisticShots": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticShots"
+      },
+      "StatisticGoals": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticGoals"
+      },
+      "StatisticPasses": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticPasses"
+      },
+      "StatisticTackles": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticTackles"
+      },
+      "StatisticDuels": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticDuels"
+      },
+      "StatisticDribbles": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticDribbles"
+      },
+      "StatisticFouls": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticFouls"
+      },
+      "StatisticCards": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticCards"
+      },
+      "StatisticPenalty": {
+        "$ref": "./players.openapi.json#/components/schemas/StatisticPenalty"
+      },
+      "TopScorersDTO": {
+        "$ref": "./players.openapi.json#/components/schemas/TopScorersDTO"
+      },
+      "FixturesWeekData": {
+        "$ref": "./week-data.openapi.json#/components/schemas/FixturesWeekData"
+      },
+      "StandingsWeekData": {
+        "$ref": "./week-data.openapi.json#/components/schemas/StandingsWeekData"
+      },
+      "StandingsDTO": {
+        "$ref": "./standings.openapi.json#/components/schemas/StandingsDTO"
+      },
+      "StandingsFilter": {
+        "$ref": "./standings.openapi.json#/components/schemas/StandingsFilter"
+      },
+      "TeamCoachDTO": {
+        "$ref": "./coaches.openapi.json#/components/schemas/TeamCoachDTO"
+      },
+      "CoachBirth": {
+        "$ref": "./coaches.openapi.json#/components/schemas/CoachBirth"
+      },
+      "CoachTeam": {
+        "$ref": "./coaches.openapi.json#/components/schemas/CoachTeam"
+      },
+      "CareerItem": {
+        "$ref": "./coaches.openapi.json#/components/schemas/CareerItem"
+      },
+      "CareerTeam": {
+        "$ref": "./coaches.openapi.json#/components/schemas/CareerTeam"
+      },
+      "GetAllTeamCoachesDTO": {
+        "$ref": "./coaches.openapi.json#/components/schemas/GetAllTeamCoachesDTO"
+      },
+      "LiveFixtureUpdateDTO": {
+        "$ref": "./live-updates.openapi.json#/components/schemas/LiveFixtureUpdateDTO"
+      },
+      "LiveFixturesUpdateDTO": {
+        "$ref": "./live-updates.openapi.json#/components/schemas/LiveFixturesUpdateDTO"
+      },
+      "LiveFixtureEventsUpdateDTO": {
+        "$ref": "./live-updates.openapi.json#/components/schemas/LiveFixtureEventsUpdateDTO"
+      },
+      "LiveFixtureEventsBatchUpdateDTO": {
+        "$ref": "./live-updates.openapi.json#/components/schemas/LiveFixtureEventsBatchUpdateDTO"
+      },
+      "GetAllTeamsDTO": {
+        "$ref": "./teams.openapi.json#/components/schemas/GetAllTeamsDTO"
+      }
+    }
+  }
+}

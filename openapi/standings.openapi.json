@@ -1,0 +1,186 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore standings contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "StandingsPlayed": {
+        "type": "object",
+        "properties": {
+          "played": {
+            "type": "number"
+          },
+          "win": {
+            "type": "number"
+          },
+          "draw": {
+            "type": "number"
+          },
+          "lose": {
+            "type": "number"
+          },
+          "goals": {
+            "type": "object",
+            "properties": {
+              "for": {
+                "type": "number"
+              },
+              "against": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "for",
+              "against"
+            ]
+          }
+        },
+        "required": [
+          "played",
+          "win",
+          "draw",
+          "lose",
+          "goals"
+        ]
+      },
+      "StandingRanks": {
+        "type": "object",
+        "properties": {
+          "rank": {
+            "type": "number"
+          },
+          "team": {
+            "$ref": "./teams.openapi.json#/components/schemas/Team"
+          },
+          "points": {
+            "type": "number"
+          },
+          "goalsDiff": {
+            "type": "number"
+          },
+          "group": {
+            "type": "string"
+          },
+          "form": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "all": {
+            "$ref": "#/components/schemas/StandingsPlayed"
+          },
+          "home": {
+            "$ref": "#/components/schemas/StandingsPlayed"
+          },
+          "away": {
+            "$ref": "#/components/schemas/StandingsPlayed"
+          },
+          "update": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "rank",
+          "team",
+          "points",
+          "goalsDiff",
+          "group",
+          "form",
+          "status",
+          "description",
+          "all",
+          "home",
+          "away",
+          "update"
+        ]
+      },
+      "StandingsLeague": {
+        "allOf": [
+          {
+            "$ref": "./competitions.openapi.json#/components/schemas/LeagueBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "standings": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StandingRanks"
+                  }
+                }
+              }
+            },
+            "required": [
+              "standings"
+            ]
+          }
+        ]
+      },
+      "StandingsDTO": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "./common.openapi.json#/components/schemas/MongoDbId"
+          },
+          "league": {
+            "$ref": "#/components/schemas/StandingsLeague"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "x-typescript-type": "Date"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "x-typescript-type": "Date"
+          }
+        },
+        "required": [
+          "_id",
+          "league",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "StandingsFilter": {
+        "type": "object",
+        "properties": {
+          "league.id": {
+            "$ref": "./competitions.openapi.json#/components/schemas/CompetitionId"
+          },
+          "league.season": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "league.id",
+          "league.season"
+        ]
+      }
+    }
+  }
+}

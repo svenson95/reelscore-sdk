@@ -1,0 +1,168 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore coaches contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "TeamCoachDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number"
+          },
+          "birth": {
+            "$ref": "#/components/schemas/CoachBirth"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "height": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "team": {
+            "$ref": "#/components/schemas/CoachTeam"
+          },
+          "career": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "$ref": "#/components/schemas/CareerItem"
+              }
+            ],
+            "minItems": 1,
+            "maxItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "firstname",
+          "lastname",
+          "age",
+          "birth",
+          "nationality",
+          "height",
+          "weight",
+          "photo",
+          "team",
+          "career"
+        ]
+      },
+      "CoachBirth": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "place": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "place",
+          "country"
+        ]
+      },
+      "CoachTeam": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "logo"
+        ]
+      },
+      "CareerItem": {
+        "type": "object",
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/CareerTeam"
+          },
+          "start": {
+            "type": "string"
+          },
+          "end": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "team",
+          "start",
+          "end"
+        ]
+      },
+      "CareerTeam": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "logo"
+        ]
+      },
+      "GetAllTeamCoachesDTO": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamCoachDTO"
+            }
+          },
+          "length": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "length"
+        ]
+      }
+    }
+  }
+}

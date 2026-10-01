@@ -1,0 +1,174 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore search contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "SearchType": {
+        "type": "string",
+        "enum": [
+          "fixtures",
+          "competitions",
+          "teams"
+        ]
+      },
+      "FixtureSearchResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "fixtures"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "fixture": {
+                "$ref": "./fixtures.openapi.json#/components/schemas/Fixture"
+              },
+              "league": {
+                "$ref": "./fixtures.openapi.json#/components/schemas/FixtureLeague"
+              },
+              "teams": {
+                "$ref": "./fixtures.openapi.json#/components/schemas/MatchTeams"
+              }
+            },
+            "required": [
+              "fixture",
+              "league",
+              "teams"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "data"
+        ]
+      },
+      "CompetitionSearchResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "competitions"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "league": {
+                "$ref": "./fixtures.openapi.json#/components/schemas/FixtureLeague"
+              }
+            },
+            "required": [
+              "league"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "data"
+        ]
+      },
+      "TeamSearchResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "teams"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "team": {
+                "$ref": "./teams.openapi.json#/components/schemas/TeamDetails"
+              }
+            },
+            "required": [
+              "team"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "data"
+        ]
+      },
+      "SearchResult": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/FixtureSearchResult"
+          },
+          {
+            "$ref": "#/components/schemas/CompetitionSearchResult"
+          },
+          {
+            "$ref": "#/components/schemas/TeamSearchResult"
+          }
+        ]
+      },
+      "SearchResultGroup": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SearchType"
+          },
+          "label": {
+            "type": "string"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchResult"
+            }
+          }
+        },
+        "required": [
+          "type",
+          "label",
+          "results"
+        ]
+      }
+    }
+  }
+}

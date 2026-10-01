@@ -1,0 +1,129 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore statistics contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "StatisticDTO": {
+        "type": "object",
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/StatisticsTeamDetails"
+          },
+          "statistics": {
+            "$ref": "#/components/schemas/TeamStatistics"
+          }
+        },
+        "required": [
+          "team",
+          "statistics"
+        ]
+      },
+      "StatisticsTeamDetails": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "./teams.openapi.json#/components/schemas/TeamId"
+          },
+          "name": {
+            "$ref": "./teams.openapi.json#/components/schemas/TeamName"
+          },
+          "logo": {
+            "$ref": "./teams.openapi.json#/components/schemas/TeamLogo"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "logo"
+        ]
+      },
+      "TeamStatistics": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/StatisticItem"
+        }
+      },
+      "StatisticItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/StatisticItemType"
+          },
+          "value": {
+            "$ref": "#/components/schemas/StatisticItemValue"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ]
+      },
+      "StatisticItemType": {
+        "type": "string",
+        "enum": [
+          "Ball Possession",
+          "Total Shots",
+          "Shots on Goal",
+          "Shots off Goal",
+          "Corner Kicks",
+          "Fouls",
+          "Goalkeeper Saves",
+          "Offsides",
+          "Yellow Cards",
+          "Red Cards",
+          "Total passes",
+          "Passes %"
+        ]
+      },
+      "StatisticItemValue": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "StatisticKey": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/RequiredStatisticKey"
+          },
+          {
+            "$ref": "#/components/schemas/OptionalStatisticKey"
+          }
+        ]
+      },
+      "RequiredStatisticKey": {
+        "type": "string",
+        "enum": [
+          "ballPossession",
+          "shotsTotal",
+          "shotsOnGoal",
+          "shotsOffGoal",
+          "cornerKicks",
+          "fouls",
+          "goalkeeperSaves",
+          "offsides",
+          "yellowCards",
+          "redCards"
+        ]
+      },
+      "OptionalStatisticKey": {
+        "type": "string",
+        "enum": [
+          "passesTotal",
+          "passAccuracy"
+        ]
+      }
+    }
+  }
+}

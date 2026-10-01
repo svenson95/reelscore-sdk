@@ -1,0 +1,173 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore evaluations contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "AnalysisLevel": {
+        "type": "string",
+        "enum": [
+          "LUCKY",
+          "UNLUCKY"
+        ]
+      },
+      "AnalysisType": {
+        "type": "string",
+        "enum": [
+          "GOAL",
+          "NO_GOAL",
+          "LAST_MINUTE_GOAL",
+          "NO_FOUL",
+          "PENALTY",
+          "NO_PENALTY",
+          "RED_CARD",
+          "NO_RED_CARD",
+          "KEY_PLAYER_INJURY",
+          "KEY_PLAYER_YELLOW_CARD_SUSPENSION"
+        ]
+      },
+      "EvaluationAnalyses": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "$ref": "#/components/schemas/AnalysisLevel"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AnalysisType"
+          },
+          "minute": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "player": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "comments": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "level",
+          "type",
+          "minute",
+          "player",
+          "comments"
+        ]
+      },
+      "EvaluationPerformance": {
+        "type": "string",
+        "enum": [
+          "LOW",
+          "MIDDLE",
+          "HIGH"
+        ]
+      },
+      "FixtureEvaluation": {
+        "type": "object",
+        "properties": {
+          "performance": {
+            "$ref": "#/components/schemas/EvaluationPerformance"
+          },
+          "analyses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationAnalyses"
+            }
+          }
+        },
+        "required": [
+          "performance",
+          "analyses"
+        ]
+      },
+      "FixtureEvaluations": {
+        "type": "object",
+        "properties": {
+          "home": {
+            "$ref": "#/components/schemas/FixtureEvaluation"
+          },
+          "away": {
+            "$ref": "#/components/schemas/FixtureEvaluation"
+          }
+        },
+        "required": [
+          "home",
+          "away"
+        ]
+      },
+      "FixturePerformance": {
+        "type": "string",
+        "enum": [
+          "MATCH_NOT_STARTED",
+          "MATCH_POSTPONED",
+          "NO_STATISTICS_AVAILABLE",
+          "LOW",
+          "MIDDLE",
+          "HIGH"
+        ]
+      },
+      "EvaluationTeam": {
+        "type": "object",
+        "properties": {
+          "performances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FixturePerformance"
+            }
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "./fixtures.openapi.json#/components/schemas/FixtureResult"
+            }
+          }
+        },
+        "required": [
+          "performances",
+          "results"
+        ]
+      },
+      "EvaluationTeams": {
+        "type": "object",
+        "properties": {
+          "home": {
+            "$ref": "#/components/schemas/EvaluationTeam"
+          },
+          "away": {
+            "$ref": "#/components/schemas/EvaluationTeam"
+          }
+        },
+        "required": [
+          "home",
+          "away"
+        ]
+      },
+      "EvaluationDTO": {
+        "type": "object",
+        "properties": {
+          "fixture": {
+            "$ref": "./fixtures.openapi.json#/components/schemas/FixtureId"
+          },
+          "teams": {
+            "$ref": "#/components/schemas/EvaluationTeams"
+          }
+        },
+        "required": [
+          "fixture",
+          "teams"
+        ]
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "reelscore-sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "OpenAPI contracts, generated TypeScript models, shared helpers and constants.",
   "type": "module",
@@ -48,7 +48,24 @@
         "default": "./dist/cjs/shared/helpers/index.js"
       }
     },
-    "./openapi/fixtures": "./openapi/fixtures.openapi.json"
+    "./openapi/fixtures": "./openapi/fixtures.openapi.json",
+    "./openapi/week-data": "./openapi/week-data.openapi.json",
+    "./openapi/statistics": "./openapi/statistics.openapi.json",
+    "./openapi/analyses": "./openapi/analyses.openapi.json",
+    "./openapi/live-updates": "./openapi/live-updates.openapi.json",
+    "./openapi/fixture-status": "./openapi/fixture-status.openapi.json",
+    "./openapi/coaches": "./openapi/coaches.openapi.json",
+    "./openapi/competitions": "./openapi/competitions.openapi.json",
+    "./openapi/teams": "./openapi/teams.openapi.json",
+    "./openapi/players": "./openapi/players.openapi.json",
+    "./openapi/standings": "./openapi/standings.openapi.json",
+    "./openapi/reelscore": "./openapi/reelscore.openapi.json",
+    "./openapi/evaluations": "./openapi/evaluations.openapi.json",
+    "./openapi/common": "./openapi/common.openapi.json",
+    "./openapi/events": "./openapi/events.openapi.json",
+    "./openapi/provider-responses": "./openapi/provider-responses.openapi.json",
+    "./openapi/search": "./openapi/search.openapi.json",
+    "./openapi": "./openapi/reelscore.bundled.openapi.json"
   },
   "files": [
     "dist",
@@ -58,9 +75,10 @@
     "generate": "node scripts/generate-models.mjs",
     "check:generated": "node scripts/generate-models.mjs --check",
     "build": "npm run generate && node scripts/build.mjs",
-    "test": "npm run build && node --test tests/*.test.mjs",
+    "test": "npm run build && npm run test:types && node --test tests/*.test.mjs",
     "lint": "eslint --ext .ts,.mjs src scripts tests",
-    "prepack": "npm run check:generated && npm run lint && npm test"
+    "prepack": "npm run check:generated && npm run lint && npm test",
+    "test:types": "tsc -p tests/tsconfig.json --noEmit"
   },
   "dependencies": {
     "moment": "2.30.1",

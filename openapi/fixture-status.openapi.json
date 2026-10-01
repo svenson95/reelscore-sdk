@@ -1,0 +1,74 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore fixture-status contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "StatusLong": {
+        "type": "string",
+        "enum": [
+          "Time To Be Defined",
+          "Not Started",
+          "First Half, Kick Off",
+          "Halftime",
+          "Second Half, 2nd Half Started",
+          "Extra Time",
+          "Break Time",
+          "Penalty in Progress",
+          "Match Suspended",
+          "Match Interrupted",
+          "Match Finished",
+          "Match Postponed",
+          "Match Cancelled",
+          "Match Abandoned",
+          "Technical Loss",
+          "WalkOver",
+          "In Progress"
+        ]
+      },
+      "StatusShort": {
+        "type": "string",
+        "description": "Kept open for compatibility: the existing status arrays are typed as string[], so StatusShort currently accepts any string. Narrowing to an enum is a separate contract change."
+      },
+      "StatusTypeScheduled": {
+        "type": "string"
+      },
+      "StatusValueHalftime": {
+        "type": "string",
+        "enum": [
+          "HT"
+        ]
+      },
+      "StatusTypePlaying": {
+        "type": "string"
+      },
+      "StatusTypeFinished": {
+        "type": "string"
+      },
+      "StatusTypePostponed": {
+        "type": "string",
+        "enum": [
+          "PST"
+        ]
+      },
+      "StatusTypeCancelled": {
+        "type": "string",
+        "enum": [
+          "CANC"
+        ]
+      },
+      "StatusTypeAbandoned": {
+        "type": "string",
+        "enum": [
+          "ABD"
+        ]
+      },
+      "StatusTypeNotPlayed": {
+        "type": "string"
+      }
+    }
+  }
+}

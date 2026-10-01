@@ -1,0 +1,118 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "reelscore provider-responses contracts",
+    "version": "0.2.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "BaseParameters": {
+        "type": "object",
+        "properties": {
+          "fixture": {
+            "$ref": "./fixtures.openapi.json#/components/schemas/FixtureId"
+          }
+        },
+        "required": [
+          "fixture"
+        ]
+      },
+      "BasePaging": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "current",
+          "total"
+        ]
+      },
+      "RapidDTO": {
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "$ref": "#/components/schemas/BaseParameters"
+          },
+          "errors": {
+            "type": "array",
+            "items": {}
+          },
+          "paging": {
+            "$ref": "#/components/schemas/BasePaging"
+          },
+          "response": {
+            "type": "array",
+            "items": {}
+          }
+        },
+        "required": [
+          "parameters",
+          "errors",
+          "paging",
+          "response"
+        ],
+        "x-typescript-generic-array": "response"
+      },
+      "RapidEventsDTO": {
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "$ref": "#/components/schemas/BaseParameters"
+          },
+          "errors": {
+            "type": "array",
+            "items": {}
+          },
+          "paging": {
+            "$ref": "#/components/schemas/BasePaging"
+          },
+          "response": {
+            "type": "array",
+            "items": {
+              "$ref": "./events.openapi.json#/components/schemas/EventDTO"
+            }
+          }
+        },
+        "required": [
+          "parameters",
+          "errors",
+          "paging",
+          "response"
+        ]
+      },
+      "RapidStatisticsDTO": {
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "$ref": "#/components/schemas/BaseParameters"
+          },
+          "errors": {
+            "type": "array",
+            "items": {}
+          },
+          "paging": {
+            "$ref": "#/components/schemas/BasePaging"
+          },
+          "response": {
+            "type": "array",
+            "items": {
+              "$ref": "./statistics.openapi.json#/components/schemas/StatisticDTO"
+            }
+          }
+        },
+        "required": [
+          "parameters",
+          "errors",
+          "paging",
+          "response"
+        ]
+      }
+    }
+  }
+}
