@@ -42,7 +42,11 @@ npm pack
 The local pilot remains private; no registry publishing is configured.
 
 ```ts
-import type { CompetitionDTO, TeamDTO, ExtendedFixtureDTO } from 'reelscore-sdk/models';
+import type {
+  CompetitionDTO,
+  TeamDTO,
+  ExtendedFixtureDTO,
+} from 'reelscore-sdk/models';
 import { CompetitionCode, REALTIME_EVENT } from 'reelscore-sdk/constants';
 import { formatFixtureTime, timeTotal } from 'reelscore-sdk/helpers';
 ```
@@ -95,3 +99,10 @@ Verify Swift decoding against shared JSON payloads, especially optional versus
 nullable values, mixed string/number IDs, Date serialization and Unix seconds.
 TypeScript helpers do not become Swift implementations through model generation.
 Swift generation and integration remain a separate step.
+
+Competition IDs, URL slugs, season rules and round histories are shared through
+`reelscore-sdk/constants`; competition, season and round helpers are exposed
+through `reelscore-sdk/helpers`. These sources matched the controller when
+migrated. Competition display labels are exported as `COMPETITION_LABEL`, preserving
+reelscore’s existing names. The controller currently has different labels for
+some international competitions and will need to decide which names to adopt. The controller has not yet been switched to these SDK exports.
