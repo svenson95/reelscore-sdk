@@ -1,8 +1,8 @@
-export const STATUS_TYPES_SCHEDULED: string[] = ['TBD', 'NS'] as const;
+export const STATUS_VALUES_SCHEDULED: string[] = ['TBD', 'NS'] as const;
 
 export const STATUS_VALUE_HALFTIME = 'HT' as const;
 
-export const STATUS_TYPES_PLAYING: string[] = [
+export const STATUS_VALUES_PLAYING: string[] = [
   '1H',
   STATUS_VALUE_HALFTIME,
   '2H',
@@ -14,14 +14,14 @@ export const STATUS_TYPES_PLAYING: string[] = [
   'LIVE', // indicates a fixture in progress but the data indicating the half-time or elapsed time are not available
 ] as const;
 
-export const STATUS_TYPES_PLAYING_ACTIVE: string[] = [
+export const STATUS_VALUES_PLAYING_ACTIVE: string[] = [
   '1H',
   '2H',
   'ET',
   'P',
 ] as const;
 
-export const STATUS_TYPES_FINISHED: string[] = ['FT', 'AET', 'PEN'] as const;
+export const STATUS_VALUES_FINISHED: string[] = ['FT', 'AET', 'PEN'] as const;
 
 export const STATUS_VALUE_POSTPONED = 'PST' as const;
 
@@ -29,7 +29,7 @@ export const STATUS_VALUE_CANCELLED = 'CANC' as const;
 
 export const STATUS_VALUE_ABANDONED = 'ABD' as const;
 
-export const STATUS_TYPES_NOT_PLAYED: string[] = [
+export const STATUS_VALUES_NOT_PLAYED: string[] = [
   'AWD', // Technical Loss
   'WO', // WalkOver, victory by forfeit or absence of competitor
 ] as const;
