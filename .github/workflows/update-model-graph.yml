@@ -1,4 +1,4 @@
-name: Update SDK README Model Graph
+name: Update Model Graph
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  update-sdk-readme-model-graph:
+  update-model-graph:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
