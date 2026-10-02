@@ -1,0 +1,46 @@
+name: Update SDK README Model Graph
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-sdk-readme-model-graph:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out SDK repository
+        uses: actions/checkout@v4
+
+      - name: Check out Reelscore API models
+        uses: actions/checkout@v4
+        with:
+          repository: svenson95/reelscore
+          ref: main
+          path: .tmp/reelscore
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Update README model graph
+        run: node scripts/generate-model-graph.mjs .tmp/reelscore
+
+      - name: Commit changed README
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "README model graph is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs: update generated model graph"
+          git push
