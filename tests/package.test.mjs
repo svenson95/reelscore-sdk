@@ -35,7 +35,27 @@ test('status constants, realtime event names and event helpers survive both entr
   const commonJsConstants = require('reelscore-sdk/constants');
   const commonJsHelpers = require('reelscore-sdk/helpers');
 
-  assert.deepEqual(constants.STATUS_TYPES_FINISHED, ['FT', 'AET', 'PEN']);
+  assert.deepEqual(constants.STATUS_VALUES_SCHEDULED, ['TBD', 'NS']);
+  assert.deepEqual(constants.STATUS_VALUES_PLAYING, [
+    '1H',
+    'HT',
+    '2H',
+    'ET',
+    'BT',
+    'P',
+    'SUSP',
+    'INT',
+    'LIVE',
+  ]);
+  assert.deepEqual(constants.STATUS_VALUES_PLAYING_ACTIVE, [
+    '1H',
+    '2H',
+    'ET',
+    'P',
+  ]);
+  assert.deepEqual(constants.STATUS_VALUES_FINISHED, ['FT', 'AET', 'PEN']);
+  assert.deepEqual(constants.STATUS_VALUES_NOT_PLAYED, ['AWD', 'WO']);
+  assert.equal('STATUS_TYPES_PLAYING' in constants, false);
   assert.deepEqual(constants.REALTIME_EVENT, {
     FIXTURES_UPDATED: 'fixtures.updated',
     FIXTURE_EVENTS_UPDATED: 'fixture.eventsUpdated',
