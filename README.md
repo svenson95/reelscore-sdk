@@ -26,6 +26,41 @@ Fixture projections reference the common team and competition definitions.
 The pre-existing `openai/examples/` placeholders are preserved and are not used
 by generation. The schema directory is `openapi/`.
 
+## Model Graph
+
+This diagram is generated from the Reelscore API's Mongoose collection models and
+their shared SDK model imports. The workflow refreshes it on pushes to `main`.
+
+<!-- model-graph:start -->
+
+```mermaid
+flowchart LR
+  subgraph database["MongoDB collections"]
+    collection_competition_top_scorers[("competition-top-scorers")]
+    collection_fixture_events[("fixture-events")]
+    collection_fixtures[("fixtures")]
+    collection_fixtures_statistics[("fixtures-statistics")]
+    collection_standings[("standings")]
+    collection_teams[("teams")]
+  end
+  subgraph sdk["SDK models"]
+    model_ExtendedFixtureDTO["ExtendedFixtureDTO"]
+    model_RapidEventsDTO["RapidEventsDTO"]
+    model_RapidStatisticsDTO["RapidStatisticsDTO"]
+    model_StandingsDTO["StandingsDTO"]
+    model_TeamDTO["TeamDTO"]
+    model_TopScorersDTO["TopScorersDTO"]
+  end
+  collection_competition_top_scorers --> model_TopScorersDTO
+  collection_fixture_events --> model_RapidEventsDTO
+  collection_fixtures --> model_ExtendedFixtureDTO
+  collection_fixtures_statistics --> model_RapidStatisticsDTO
+  collection_standings --> model_StandingsDTO
+  collection_teams --> model_TeamDTO
+```
+
+<!-- model-graph:end -->
+
 ## Development
 
 ```sh
