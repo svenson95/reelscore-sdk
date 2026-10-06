@@ -1282,6 +1282,35 @@
         },
         "required": ["_id", "parameters", "response", "createdAt", "updatedAt"]
       },
+      "TopAssistsDTO": {
+        "type": "object",
+        "properties": {
+          "_id": { "$ref": "#/components/schemas/MongoDbId" },
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "league": { "type": "string" },
+              "season": { "type": "string" }
+            },
+            "required": ["league", "season"]
+          },
+          "response": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TopScorer" }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "x-typescript-type": "Date"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "x-typescript-type": "Date"
+          }
+        },
+        "required": ["_id", "parameters", "response", "createdAt", "updatedAt"]
+      },
       "FixturesWeekData": {
         "type": "array",
         "items": {

@@ -156,6 +156,7 @@ export type StatisticFouls = components['schemas']['StatisticFouls'];
 export type StatisticCards = components['schemas']['StatisticCards'];
 export type StatisticPenalty = components['schemas']['StatisticPenalty'];
 export type TopScorersDTO = components['schemas']['TopScorersDTO'];
+export type TopAssistsDTO = components['schemas']['TopAssistsDTO'];
 export type FixturesWeekData = components['schemas']['FixturesWeekData'];
 export type StandingsWeekData = components['schemas']['StandingsWeekData'];
 export type StandingsDTO = components['schemas']['StandingsDTO'];

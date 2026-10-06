@@ -409,6 +409,9 @@
       "TopScorersDTO": {
         "$ref": "./players.openapi.json#/components/schemas/TopScorersDTO"
       },
+      "TopAssistsDTO": {
+        "$ref": "./players.openapi.json#/components/schemas/TopAssistsDTO"
+      },
       "FixturesWeekData": {
         "$ref": "./week-data.openapi.json#/components/schemas/FixturesWeekData"
       },

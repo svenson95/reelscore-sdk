@@ -651,6 +651,18 @@ export interface components {
       /** Format: date-time */
       updatedAt: Date;
     };
+    TopAssistsDTO: {
+      _id: components['schemas']['MongoDbId'];
+      parameters: {
+        league: string;
+        season: string;
+      };
+      response: components['schemas']['TopScorer'][];
+      /** Format: date-time */
+      createdAt: Date;
+      /** Format: date-time */
+      updatedAt: Date;
+    };
     FixturesWeekData: components['schemas']['ExtendedFixtureDTO'][][];
     StandingsWeekData: components['schemas']['StandingsDTO'][][];
     StandingsDTO: {
