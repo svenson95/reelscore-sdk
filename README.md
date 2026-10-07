@@ -36,6 +36,7 @@ their shared SDK model imports. The workflow refreshes it on pushes to `main`.
 ```mermaid
 flowchart LR
   subgraph database["MongoDB collections"]
+    collection_competition_top_assists[("competition-top-assists")]
     collection_competition_top_scorers[("competition-top-scorers")]
     collection_fixture_events[("fixture-events")]
     collection_fixtures[("fixtures")]
@@ -49,8 +50,10 @@ flowchart LR
     model_RapidStatisticsDTO["RapidStatisticsDTO"]
     model_StandingsDTO["StandingsDTO"]
     model_TeamDTO["TeamDTO"]
+    model_TopAssistsDTO["TopAssistsDTO"]
     model_TopScorersDTO["TopScorersDTO"]
   end
+  collection_competition_top_assists --> model_TopAssistsDTO
   collection_competition_top_scorers --> model_TopScorersDTO
   collection_fixture_events --> model_RapidEventsDTO
   collection_fixtures --> model_ExtendedFixtureDTO
