@@ -1367,9 +1367,7 @@
           "team": { "$ref": "#/components/schemas/CoachTeam" },
           "career": {
             "type": "array",
-            "prefixItems": [{ "$ref": "#/components/schemas/CareerItem" }],
-            "minItems": 1,
-            "maxItems": 1
+            "items": { "$ref": "#/components/schemas/CareerItem" }
           }
         },
         "required": [
@@ -1410,7 +1408,7 @@
         "properties": {
           "team": { "$ref": "#/components/schemas/CareerTeam" },
           "start": { "type": "string" },
-          "end": { "type": "string" }
+          "end": { "type": ["string", "null"] }
         },
         "required": ["team", "start", "end"]
       },
@@ -1428,11 +1426,38 @@
         "properties": {
           "data": {
             "type": "array",
-            "items": { "$ref": "#/components/schemas/TeamCoachDTO" }
+            "items": { "$ref": "#/components/schemas/TeamCoachesDocumentDTO" }
           },
           "length": { "type": "number" }
         },
         "required": ["data", "length"]
+      },
+      "TeamCoachesDocumentDTO": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string" },
+          "parameters": {
+            "type": "object",
+            "properties": { "team": { "type": "string" } },
+            "required": ["team"]
+          },
+          "response": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TeamCoachDTO" }
+          },
+          "lastFetchedAt": { "type": "string", "format": "date-time" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "__v": { "type": "integer" }
+        },
+        "required": [
+          "_id",
+          "parameters",
+          "response",
+          "createdAt",
+          "updatedAt",
+          "__v"
+        ]
       },
       "LiveFixtureUpdateDTO": {
         "type": "object",

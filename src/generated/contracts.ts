@@ -689,7 +689,7 @@ export interface components {
       weight: string;
       photo: string;
       team: components['schemas']['CoachTeam'];
-      career: [components['schemas']['CareerItem']];
+      career: components['schemas']['CareerItem'][];
     };
     CoachBirth: {
       date: string;
@@ -704,7 +704,7 @@ export interface components {
     CareerItem: {
       team: components['schemas']['CareerTeam'];
       start: string;
-      end: string;
+      end: string | null;
     };
     CareerTeam: {
       id: number;
@@ -712,8 +712,22 @@ export interface components {
       logo: string;
     };
     GetAllTeamCoachesDTO: {
-      data: components['schemas']['TeamCoachDTO'][];
+      data: components['schemas']['TeamCoachesDocumentDTO'][];
       length: number;
+    };
+    TeamCoachesDocumentDTO: {
+      _id: string;
+      parameters: {
+        team: string;
+      };
+      response: components['schemas']['TeamCoachDTO'][];
+      /** Format: date-time */
+      lastFetchedAt?: string;
+      /** Format: date-time */
+      createdAt: string;
+      /** Format: date-time */
+      updatedAt: string;
+      __v: number;
     };
     LiveFixtureUpdateDTO: {
       fixtureId: components['schemas']['FixtureId'];

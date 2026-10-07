@@ -442,6 +442,9 @@
       "GetAllTeamCoachesDTO": {
         "$ref": "./coaches.openapi.json#/components/schemas/GetAllTeamCoachesDTO"
       },
+      "TeamCoachesDocumentDTO": {
+        "$ref": "./coaches.openapi.json#/components/schemas/TeamCoachesDocumentDTO"
+      },
       "LiveFixtureUpdateDTO": {
         "$ref": "./live-updates.openapi.json#/components/schemas/LiveFixtureUpdateDTO"
       },

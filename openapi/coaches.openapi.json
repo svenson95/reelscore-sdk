@@ -45,13 +45,9 @@
           },
           "career": {
             "type": "array",
-            "prefixItems": [
-              {
-                "$ref": "#/components/schemas/CareerItem"
-              }
-            ],
-            "minItems": 1,
-            "maxItems": 1
+            "items": {
+              "$ref": "#/components/schemas/CareerItem"
+            }
           }
         },
         "required": [
@@ -82,11 +78,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "date",
-          "place",
-          "country"
-        ]
+        "required": ["date", "place", "country"]
       },
       "CoachTeam": {
         "type": "object",
@@ -101,11 +93,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "name",
-          "logo"
-        ]
+        "required": ["id", "name", "logo"]
       },
       "CareerItem": {
         "type": "object",
@@ -117,14 +105,10 @@
             "type": "string"
           },
           "end": {
-            "type": "string"
+            "type": ["string", "null"]
           }
         },
-        "required": [
-          "team",
-          "start",
-          "end"
-        ]
+        "required": ["team", "start", "end"]
       },
       "CareerTeam": {
         "type": "object",
@@ -139,11 +123,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "name",
-          "logo"
-        ]
+        "required": ["id", "name", "logo"]
       },
       "GetAllTeamCoachesDTO": {
         "type": "object",
@@ -151,16 +131,59 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TeamCoachDTO"
+              "$ref": "#/components/schemas/TeamCoachesDocumentDTO"
             }
           },
           "length": {
             "type": "number"
           }
         },
+        "required": ["data", "length"]
+      },
+      "TeamCoachesDocumentDTO": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "team": {
+                "type": "string"
+              }
+            },
+            "required": ["team"]
+          },
+          "response": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamCoachDTO"
+            }
+          },
+          "lastFetchedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "__v": {
+            "type": "integer"
+          }
+        },
         "required": [
-          "data",
-          "length"
+          "_id",
+          "parameters",
+          "response",
+          "createdAt",
+          "updatedAt",
+          "__v"
         ]
       }
     }
