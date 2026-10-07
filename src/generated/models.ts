@@ -168,6 +168,8 @@ export type CareerItem = components['schemas']['CareerItem'];
 export type CareerTeam = components['schemas']['CareerTeam'];
 export type GetAllTeamCoachesDTO =
   components['schemas']['GetAllTeamCoachesDTO'];
+export type TeamCoachesDocumentDTO =
+  components['schemas']['TeamCoachesDocumentDTO'];
 export type LiveFixtureUpdateDTO =
   components['schemas']['LiveFixtureUpdateDTO'];
 export type LiveFixturesUpdateDTO =
