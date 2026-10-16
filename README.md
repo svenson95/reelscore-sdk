@@ -42,6 +42,7 @@ flowchart LR
     collection_fixtures[("fixtures")]
     collection_fixtures_statistics[("fixtures-statistics")]
     collection_standings[("standings")]
+    collection_team_coaches[("team-coaches")]
     collection_teams[("teams")]
   end
   subgraph sdk["SDK models"]
@@ -49,6 +50,7 @@ flowchart LR
     model_RapidEventsDTO["RapidEventsDTO"]
     model_RapidStatisticsDTO["RapidStatisticsDTO"]
     model_StandingsDTO["StandingsDTO"]
+    model_TeamCoachDTO["TeamCoachDTO"]
     model_TeamDTO["TeamDTO"]
     model_TopAssistsDTO["TopAssistsDTO"]
     model_TopScorersDTO["TopScorersDTO"]
@@ -59,6 +61,7 @@ flowchart LR
   collection_fixtures --> model_ExtendedFixtureDTO
   collection_fixtures_statistics --> model_RapidStatisticsDTO
   collection_standings --> model_StandingsDTO
+  collection_team_coaches --> model_TeamCoachDTO
   collection_teams --> model_TeamDTO
 ```
 
