@@ -459,13 +459,17 @@ export interface components {
     StatusTypeAbandoned: 'ABD';
     StatusTypeNotPlayed: string;
     FixturePlayersWithStreak: {
-      home: components['schemas']['GoalScorers'];
-      away: components['schemas']['GoalScorers'];
+      home: components['schemas']['GoalScorerGoalsByMatch'][];
+      away: components['schemas']['GoalScorerGoalsByMatch'][];
     };
     GoalScorers: components['schemas']['PlayerName'][];
     FixtureHomeOrAwayStrong: {
       home: boolean;
       away: boolean;
+    };
+    GoalScorerGoalsByMatch: {
+      name: components['schemas']['PlayerName'];
+      goalsByMatch: number[];
     };
     AnalysesDTO: {
       playersWithStreak: components['schemas']['FixturePlayersWithStreak'];
@@ -689,7 +693,7 @@ export interface components {
       weight: string;
       photo: string;
       team: components['schemas']['CoachTeam'];
-      career: components['schemas']['CareerItem'][];
+      career: [components['schemas']['CareerItem']];
     };
     CoachBirth: {
       date: string;
@@ -712,7 +716,7 @@ export interface components {
       logo: string;
     };
     GetAllTeamCoachesDTO: {
-      data: components['schemas']['TeamCoachesDocumentDTO'][];
+      data: components['schemas']['TeamCoachDTO'][];
       length: number;
     };
     TeamCoachesDocumentDTO: {
