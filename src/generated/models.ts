@@ -121,6 +121,8 @@ export type FixturePlayersWithStreak =
 export type GoalScorers = components['schemas']['GoalScorers'];
 export type FixtureHomeOrAwayStrong =
   components['schemas']['FixtureHomeOrAwayStrong'];
+export type GoalScorerGoalsByMatch =
+  components['schemas']['GoalScorerGoalsByMatch'];
 export type AnalysesDTO = components['schemas']['AnalysesDTO'];
 export type StatisticKey = components['schemas']['StatisticKey'];
 export type RequiredStatisticKey =

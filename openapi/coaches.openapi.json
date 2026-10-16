@@ -45,9 +45,13 @@
           },
           "career": {
             "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CareerItem"
-            }
+            "prefixItems": [
+              {
+                "$ref": "#/components/schemas/CareerItem"
+              }
+            ],
+            "minItems": 1,
+            "maxItems": 1
           }
         },
         "required": [
@@ -131,7 +135,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TeamCoachesDocumentDTO"
+              "$ref": "#/components/schemas/TeamCoachDTO"
             }
           },
           "length": {

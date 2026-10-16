@@ -11,10 +11,16 @@
         "type": "object",
         "properties": {
           "home": {
-            "$ref": "./players.openapi.json#/components/schemas/GoalScorers"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoalScorerGoalsByMatch"
+            }
           },
           "away": {
-            "$ref": "./players.openapi.json#/components/schemas/GoalScorers"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoalScorerGoalsByMatch"
+            }
           }
         },
         "required": [
@@ -35,6 +41,24 @@
         "required": [
           "home",
           "away"
+        ]
+      },
+      "GoalScorerGoalsByMatch": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "./players.openapi.json#/components/schemas/PlayerName"
+          },
+          "goalsByMatch": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "goalsByMatch"
         ]
       },
       "AnalysesDTO": {

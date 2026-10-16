@@ -888,8 +888,14 @@
       "FixturePlayersWithStreak": {
         "type": "object",
         "properties": {
-          "home": { "$ref": "#/components/schemas/GoalScorers" },
-          "away": { "$ref": "#/components/schemas/GoalScorers" }
+          "home": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/GoalScorerGoalsByMatch" }
+          },
+          "away": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/GoalScorerGoalsByMatch" }
+          }
         },
         "required": ["home", "away"]
       },
@@ -904,6 +910,14 @@
           "away": { "type": "boolean" }
         },
         "required": ["home", "away"]
+      },
+      "GoalScorerGoalsByMatch": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/components/schemas/PlayerName" },
+          "goalsByMatch": { "type": "array", "items": { "type": "number" } }
+        },
+        "required": ["name", "goalsByMatch"]
       },
       "AnalysesDTO": {
         "type": "object",
@@ -1367,7 +1381,9 @@
           "team": { "$ref": "#/components/schemas/CoachTeam" },
           "career": {
             "type": "array",
-            "items": { "$ref": "#/components/schemas/CareerItem" }
+            "prefixItems": [{ "$ref": "#/components/schemas/CareerItem" }],
+            "minItems": 1,
+            "maxItems": 1
           }
         },
         "required": [
@@ -1426,7 +1442,7 @@
         "properties": {
           "data": {
             "type": "array",
-            "items": { "$ref": "#/components/schemas/TeamCoachesDocumentDTO" }
+            "items": { "$ref": "#/components/schemas/TeamCoachDTO" }
           },
           "length": { "type": "number" }
         },

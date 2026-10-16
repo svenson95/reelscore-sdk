@@ -313,6 +313,9 @@
       "FixtureHomeOrAwayStrong": {
         "$ref": "./analyses.openapi.json#/components/schemas/FixtureHomeOrAwayStrong"
       },
+      "GoalScorerGoalsByMatch": {
+        "$ref": "./analyses.openapi.json#/components/schemas/GoalScorerGoalsByMatch"
+      },
       "AnalysesDTO": {
         "$ref": "./analyses.openapi.json#/components/schemas/AnalysesDTO"
       },
