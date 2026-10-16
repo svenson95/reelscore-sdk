@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readPersistedModel } from './read-persisted-model.mjs';
 
 const [apiRepositoryPath] = process.argv.slice(2);
 
@@ -35,40 +36,15 @@ function findModelFiles(directoryPath) {
   return nestedFiles;
 }
 
-function readPersistedModel(filePath) {
-  const source = fs.readFileSync(filePath, 'utf8');
-  const sdkImport = source.match(
-    /import\s+type\s*{\s*([^}]+)\s*}\s*from\s*['"]@reelscore-sdk\/models['"]/s
-  );
-  const collection = source.match(
-    /mongoose\.model(?:<[^>]+>)?\s*\(\s*['"]([^'"]+)['"]/s
-  );
-
-  if (!sdkImport || !collection) {
-    throw new Error(
-      `Could not read collection and SDK model from ${filePath}.`
-    );
-  }
-
-  const modelName = sdkImport[1].split(',')[0].trim();
-
-  if (!/^[A-Za-z_$][\w$]*$/.test(modelName)) {
-    throw new Error(`Expected one named SDK model import in ${filePath}.`);
-  }
-
-  return {
-    collectionName: collection[1],
-    modelName,
-  };
-}
-
 function createNodeId(prefix, label) {
   return `${prefix}_${label.replace(/[^a-zA-Z0-9_]/g, '_')}`;
 }
 
 const modelFiles = findModelFiles(databaseDirectory).sort();
 const persistedModels = modelFiles
-  .map(readPersistedModel)
+  .map((filePath) =>
+    readPersistedModel(fs.readFileSync(filePath, 'utf8'), filePath)
+  )
   .sort((first, second) =>
     first.collectionName.localeCompare(second.collectionName)
   );
