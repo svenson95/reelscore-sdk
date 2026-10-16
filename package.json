@@ -1,6 +1,6 @@
 {
   "name": "reelscore-sdk",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": true,
   "description": "OpenAPI contracts, generated TypeScript models, shared helpers and constants.",
   "type": "module",
@@ -81,17 +81,17 @@
     "test:types": "tsc -p tests/tsconfig.json --noEmit"
   },
   "dependencies": {
-    "moment": "2.30.1",
+    "moment": "2.31.0",
     "moment-timezone": "0.5.48"
   },
   "devDependencies": {
-    "typescript": "5.9.3",
-    "openapi-typescript": "7.10.1",
+    "@typescript-eslint/eslint-plugin": "7.18.0",
+    "@typescript-eslint/parser": "7.18.0",
     "ajv": "8.17.1",
     "eslint": "8.57.0",
-    "@typescript-eslint/parser": "7.18.0",
-    "@typescript-eslint/eslint-plugin": "7.18.0",
-    "prettier": "2.6.2"
+    "openapi-typescript": "7.10.1",
+    "prettier": "2.6.2",
+    "typescript": "5.9.3"
   },
   "typesVersions": {
     "*": {
