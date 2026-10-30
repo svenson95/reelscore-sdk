@@ -58,6 +58,16 @@ for (const format of ['ESM', 'CommonJS']) {
     );
   });
 
+  test(`${format}: MLS standings are handled as multiple groups`, () => {
+    assert.equal(
+      functions.isCompetitionWithMultipleGroups(
+        values.COMPETITION_ID.MAJOR_LEAGUE_SOCCER,
+        2026
+      ),
+      true
+    );
+  });
+
   test(`${format}: round histories retain earlier definitions until replaced`, () => {
     const earlierRounds = { 1: 'Group Stage' };
     const newerRounds = { 1: 'League Stage' };
