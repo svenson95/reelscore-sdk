@@ -176,6 +176,8 @@ export interface components {
       final: components['schemas']['FixtureFinal'];
       prediction?: components['schemas']['FixturePrediction'];
       evaluations?: components['schemas']['FixtureEvaluations'];
+      /** Format: date-time */
+      postMatchRefreshAt?: string | null;
     };
     /** @enum {number} */
     PredictionProbability: 0.75 | 0.8 | 0.85 | 0.9 | 0.95;

@@ -326,6 +326,11 @@
               },
               "evaluations": {
                 "$ref": "./evaluations.openapi.json#/components/schemas/FixtureEvaluations"
+              },
+              "postMatchRefreshAt": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
               }
             },
             "required": [
