@@ -74,6 +74,8 @@ const DE_SUPER_CUP = {
 
 const DE_DFB_POKAL_2026 = {
   1: 'Round of 64',
+  2: 'Round of 32',
+  3: 'Round of 16',
 };
 const DE_DFB_POKAL_2023 = {
   1: '1st Round',
@@ -86,10 +88,44 @@ const DE_DFB_POKAL_2023 = {
 
 /* SPAIN */
 const LA_LIGA_2026 = {
-  ...BIG_LEAGUE,
+  1: 'Regular Season - 1',
+  2: 'Regular Season - 2',
+  3: 'Regular Season - 3',
   4: 'Regular Season - 6',
   5: 'Regular Season - 4',
   6: 'Regular Season - 5',
+  7: 'Regular Season - 7',
+  8: 'Regular Season - 8',
+  9: 'Regular Season - 9',
+  10: 'Regular Season - 10',
+  11: 'Regular Season - 11',
+  12: 'Regular Season - 12',
+  13: 'Regular Season - 13',
+  14: 'Regular Season - 14',
+  15: 'Regular Season - 23',
+  16: 'Regular Season - 15',
+  17: 'Regular Season - 16',
+  18: 'Regular Season - 17',
+  19: 'Regular Season - 18',
+  20: 'Regular Season - 19',
+  21: 'Regular Season - 20',
+  22: 'Regular Season - 21',
+  23: 'Regular Season - 22',
+  24: 'Regular Season - 24',
+  25: 'Regular Season - 25',
+  26: 'Regular Season - 26',
+  27: 'Regular Season - 27',
+  28: 'Regular Season - 28',
+  29: 'Regular Season - 29',
+  30: 'Regular Season - 30',
+  31: 'Regular Season - 31',
+  32: 'Regular Season - 32',
+  33: 'Regular Season - 33',
+  34: 'Regular Season - 34',
+  35: 'Regular Season - 35',
+  36: 'Regular Season - 36',
+  37: 'Regular Season - 37',
+  38: 'Regular Season - 38',
 };
 const LA_LIGA_2025 = {
   ...BIG_LEAGUE,
@@ -156,6 +192,9 @@ const EN_LEAGUE_CUP_2026 = {
   1: 'Preliminary Round',
   2: 'Round of 128',
   3: 'Round of 64',
+  4: 'Round of 32',
+  5: 'Round of 16',
+  6: 'Quarter-finals',
 };
 
 const EN_EFL_TROPHY = {
@@ -176,6 +215,13 @@ const EN_EFL_TROPHY = {
   15: 'Final',
 };
 
+const EN_FA_TROPHY_2026 = {
+  1: `1st${EN_FA_TROPHY_QUALIFY_ROUND}`,
+  2: 'Semi-finals',
+  3: 'Final',
+  4: '1/128-finals',
+  5: 'Round of 128',
+};
 const EN_FA_TROPHY_2025 = {
   1: `1st${EN_FA_TROPHY_QUALIFY_ROUND}`,
   2: `2nd${EN_FA_TROPHY_QUALIFY_ROUND}`,
@@ -210,6 +256,11 @@ const EN_FA_CUP_BASE = {
   6: '3rd Round Qualifying Replays',
   7: '4th Round Qualifying',
   8: '4th Round Qualifying Replays',
+};
+const EN_FA_CUP_2026 = {
+  ...EN_FA_CUP_BASE,
+  8: '1/128-finals',
+  9: 'Round of 128',
 };
 const EN_FA_CUP_2025 = {
   ...EN_FA_CUP_BASE,
@@ -302,6 +353,7 @@ const IT_COPPA_ITALIA_2026 = {
   1: 'Round of 128',
   2: 'Round of 64',
   3: 'Round of 32',
+  4: 'Round of 16',
 };
 const IT_COPPA_ITALIA_2025 = {
   1: 'Preliminary Round',
@@ -523,6 +575,32 @@ const INTERNATIONAL_EURO_CHAMPIONSHIP_2024 = {
   22: 'Final',
 };
 
+const INTERNATIONAL_UEFA_NATIONS_LEAGUE_2026 = {
+  1: 'League D - 1',
+  2: 'League A - 1',
+  3: 'League B - 1',
+  4: 'League C - 1',
+  5: 'League D - 2',
+  6: 'League A - 2',
+  7: 'League B - 2',
+  8: 'League C - 2',
+  9: 'League D - 3',
+  10: 'League A - 3',
+  11: 'League B - 3',
+  12: 'League C - 3',
+  13: 'League D - 4',
+  14: 'League B - 4',
+  15: 'League A - 4',
+  16: 'League C - 4',
+  17: 'League A - 5',
+  18: 'League C - 5',
+  19: 'League B - 5',
+  20: 'League D - 5',
+  21: 'League C - 6',
+  22: 'League A - 6',
+  23: 'League D - 6',
+  24: 'League B - 6',
+};
 const INTERNATIONAL_UEFA_NATIONS_LEAGUE_2024 = {
   1: 'League C - 1',
   2: 'League A - 1',
@@ -624,35 +702,6 @@ const MLS_BASE = {
   49: `${REGULAR_SEASON_STR}49`,
   50: `${REGULAR_SEASON_STR}50`,
 };
-const MLS_2026 = {
-  ...SMALL_LEAGUE,
-  12: 'Regular Season - 13',
-  13: 'Regular Season - 14',
-  14: 'Regular Season - 15',
-  15: 'Regular Season - 16',
-  16: 'Regular Season - 17',
-  17: 'Regular Season - 18',
-  18: 'Regular Season - 19',
-  19: 'Regular Season - 20',
-  20: 'Regular Season - 21',
-  21: 'Regular Season - 22',
-  22: 'Regular Season - 23',
-  23: 'Regular Season - 24',
-  24: 'Regular Season - 25',
-  25: 'Regular Season - 26',
-  26: 'Regular Season - 27',
-  27: 'Regular Season - 28',
-  28: 'Regular Season - 29',
-  29: 'Regular Season - 30',
-  30: 'Regular Season - 31',
-  31: 'Regular Season - 32',
-  32: 'Regular Season - 33',
-  33: 'Regular Season - 34',
-  34: 'Regular Season - 35',
-  35: 'Regular Season - 36',
-  36: 'Regular Season - 12',
-  37: 'Regular Season - 37',
-};
 const MLS_2025 = {
   ...SMALL_LEAGUE,
   35: 'Round of 32',
@@ -724,6 +773,7 @@ export const COMPETITION_ROUNDS = buildCompetitionRounds({
     2023: EN_FA_CUP_2023,
     2024: EN_FA_CUP_2024,
     2025: EN_FA_CUP_2025,
+    2026: EN_FA_CUP_2026,
   },
   46: {
     2023: EN_EFL_TROPHY,
@@ -731,6 +781,7 @@ export const COMPETITION_ROUNDS = buildCompetitionRounds({
   47: {
     2023: EN_FA_TROPHY_2023,
     2025: EN_FA_TROPHY_2025,
+    2026: EN_FA_TROPHY_2026,
   },
   48: {
     2023: EN_LEAGUE_CUP_2023,
@@ -805,6 +856,7 @@ export const COMPETITION_ROUNDS = buildCompetitionRounds({
   },
   5: {
     2024: INTERNATIONAL_UEFA_NATIONS_LEAGUE_2024,
+    2026: INTERNATIONAL_UEFA_NATIONS_LEAGUE_2026,
   },
   10: {
     2023: INTERNATIONAL_FRIENDLIES_2023,
@@ -825,7 +877,6 @@ export const COMPETITION_ROUNDS = buildCompetitionRounds({
     2023: MLS_2023,
     2024: MLS_2024,
     2025: MLS_2025,
-    2026: MLS_2026,
   },
 });
 
