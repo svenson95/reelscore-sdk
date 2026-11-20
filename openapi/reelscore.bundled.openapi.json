@@ -1560,6 +1560,293 @@
           "length": { "type": "number" }
         },
         "required": ["data", "length"]
+      },
+      "LineupPlayer": {
+        "type": "object",
+        "properties": {
+          "id": { "type": ["number", "null"] },
+          "name": { "type": ["string", "null"] },
+          "number": { "type": ["number", "null"] },
+          "pos": { "type": ["string", "null"] },
+          "grid": { "type": ["string", "null"] }
+        },
+        "required": ["id", "name", "number", "pos", "grid"]
+      },
+      "LineupTeam": {
+        "type": "object",
+        "properties": {
+          "id": { "type": ["number", "null"] },
+          "name": { "type": ["string", "null"] },
+          "logo": { "type": ["string", "null"] },
+          "colors": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "player": {
+                    "type": "object",
+                    "properties": {
+                      "primary": { "type": ["string", "null"] },
+                      "number": { "type": ["string", "null"] },
+                      "border": { "type": ["string", "null"] }
+                    },
+                    "required": ["primary", "number", "border"]
+                  },
+                  "goalkeeper": {
+                    "type": "object",
+                    "properties": {
+                      "primary": { "type": ["string", "null"] },
+                      "number": { "type": ["string", "null"] },
+                      "border": { "type": ["string", "null"] }
+                    },
+                    "required": ["primary", "number", "border"]
+                  }
+                },
+                "required": ["player", "goalkeeper"]
+              },
+              { "type": "null" }
+            ]
+          }
+        },
+        "required": ["id", "name", "logo", "colors"]
+      },
+      "LineupDTO": {
+        "type": "object",
+        "properties": {
+          "team": { "$ref": "#/components/schemas/LineupTeam" },
+          "formation": { "type": ["string", "null"] },
+          "startXI": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "player": { "$ref": "#/components/schemas/LineupPlayer" }
+              },
+              "required": ["player"]
+            }
+          },
+          "substitutes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "player": { "$ref": "#/components/schemas/LineupPlayer" }
+              },
+              "required": ["player"]
+            }
+          },
+          "coach": {
+            "type": "object",
+            "properties": {
+              "id": { "type": ["number", "null"] },
+              "name": { "type": ["string", "null"] },
+              "photo": { "type": ["string", "null"] }
+            },
+            "required": ["id", "name", "photo"]
+          }
+        },
+        "required": ["team", "formation", "startXI", "substitutes", "coach"]
+      },
+      "MatchPlayerStatistics": {
+        "type": "object",
+        "properties": {
+          "games": {
+            "type": "object",
+            "properties": {
+              "minutes": { "type": ["number", "null"] },
+              "number": { "type": ["number", "null"] },
+              "position": { "type": ["string", "null"] },
+              "rating": { "type": ["string", "null"] },
+              "captain": { "type": ["boolean", "null"] },
+              "substitute": { "type": ["boolean", "null"] }
+            },
+            "required": [
+              "minutes",
+              "number",
+              "position",
+              "rating",
+              "captain",
+              "substitute"
+            ]
+          },
+          "offsides": { "type": ["number", "null"] },
+          "shots": {
+            "type": "object",
+            "properties": {
+              "total": { "type": ["number", "null"] },
+              "on": { "type": ["number", "null"] }
+            },
+            "required": ["total", "on"]
+          },
+          "goals": {
+            "type": "object",
+            "properties": {
+              "total": { "type": ["number", "null"] },
+              "conceded": { "type": ["number", "null"] },
+              "assists": { "type": ["number", "null"] },
+              "saves": { "type": ["number", "null"] }
+            },
+            "required": ["total", "conceded", "assists", "saves"]
+          },
+          "passes": {
+            "type": "object",
+            "properties": {
+              "total": { "type": ["number", "null"] },
+              "key": { "type": ["number", "null"] },
+              "accuracy": { "type": ["string", "null"] }
+            },
+            "required": ["total", "key", "accuracy"]
+          },
+          "tackles": {
+            "type": "object",
+            "properties": {
+              "total": { "type": ["number", "null"] },
+              "blocks": { "type": ["number", "null"] },
+              "interceptions": { "type": ["number", "null"] }
+            },
+            "required": ["total", "blocks", "interceptions"]
+          },
+          "duels": {
+            "type": "object",
+            "properties": {
+              "total": { "type": ["number", "null"] },
+              "won": { "type": ["number", "null"] }
+            },
+            "required": ["total", "won"]
+          },
+          "dribbles": {
+            "type": "object",
+            "properties": {
+              "attempts": { "type": ["number", "null"] },
+              "success": { "type": ["number", "null"] },
+              "past": { "type": ["number", "null"] }
+            },
+            "required": ["attempts", "success", "past"]
+          },
+          "fouls": {
+            "type": "object",
+            "properties": {
+              "drawn": { "type": ["number", "null"] },
+              "committed": { "type": ["number", "null"] }
+            },
+            "required": ["drawn", "committed"]
+          },
+          "cards": {
+            "type": "object",
+            "properties": {
+              "yellow": { "type": ["number", "null"] },
+              "red": { "type": ["number", "null"] }
+            },
+            "required": ["yellow", "red"]
+          },
+          "penalty": {
+            "type": "object",
+            "properties": {
+              "won": { "type": ["number", "null"] },
+              "commited": { "type": ["number", "null"] },
+              "scored": { "type": ["number", "null"] },
+              "missed": { "type": ["number", "null"] },
+              "saved": { "type": ["number", "null"] }
+            },
+            "required": ["won", "commited", "scored", "missed", "saved"]
+          }
+        },
+        "required": [
+          "games",
+          "offsides",
+          "shots",
+          "goals",
+          "passes",
+          "tackles",
+          "duels",
+          "dribbles",
+          "fouls",
+          "cards",
+          "penalty"
+        ]
+      },
+      "MatchPlayerStatisticsDTO": {
+        "type": "object",
+        "properties": {
+          "team": {
+            "type": "object",
+            "properties": {
+              "id": { "type": ["number", "null"] },
+              "name": { "type": ["string", "null"] },
+              "logo": { "type": ["string", "null"] }
+            },
+            "required": ["id", "name", "logo"]
+          },
+          "players": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "player": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": ["number", "null"] },
+                    "name": { "type": ["string", "null"] },
+                    "photo": { "type": ["string", "null"] }
+                  },
+                  "required": ["id", "name", "photo"]
+                },
+                "statistics": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatchPlayerStatistics"
+                  }
+                }
+              },
+              "required": ["player", "statistics"]
+            }
+          }
+        },
+        "required": ["team", "players"]
+      },
+      "RapidLineupsDTO": {
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "type": "object",
+            "properties": { "fixture": { "type": ["string", "number"] } },
+            "required": ["fixture"]
+          },
+          "response": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LineupDTO" }
+          }
+        },
+        "required": ["parameters", "response"]
+      },
+      "RapidPlayersStatisticsDTO": {
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "type": "object",
+            "properties": { "fixture": { "type": ["string", "number"] } },
+            "required": ["fixture"]
+          },
+          "response": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/MatchPlayerStatisticsDTO" }
+          }
+        },
+        "required": ["parameters", "response"]
+      },
+      "MatchLineupsResult": {
+        "type": "object",
+        "properties": {
+          "lineups": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LineupDTO" }
+          },
+          "playerStatistics": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/MatchPlayerStatisticsDTO" }
+          }
+        },
+        "required": ["lineups", "playerStatistics"]
       }
     }
   }

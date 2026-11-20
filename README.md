@@ -125,7 +125,7 @@ non-null. Coach declarations still use boxed `String`/`Number` types whereas
 reelscore uses primitives. These differences require a reviewed controller
 migration and persisted-payload validation.
 
-Controller-only database, cron, lineup and provider models remain in that
+Controller-only database, cron and remaining provider models remain in that
 repository. The controller has additional provider models and different file
 organization, so replacing its entire model tree automatically is inappropriate.
 
