@@ -462,6 +462,30 @@
       },
       "GetAllTeamsDTO": {
         "$ref": "./teams.openapi.json#/components/schemas/GetAllTeamsDTO"
+      },
+      "LineupPlayer": {
+        "$ref": "./match-lineups.openapi.json#/components/schemas/LineupPlayer"
+      },
+      "LineupTeam": {
+        "$ref": "./match-lineups.openapi.json#/components/schemas/LineupTeam"
+      },
+      "LineupDTO": {
+        "$ref": "./match-lineups.openapi.json#/components/schemas/LineupDTO"
+      },
+      "MatchPlayerStatistics": {
+        "$ref": "./match-lineups.openapi.json#/components/schemas/MatchPlayerStatistics"
+      },
+      "MatchPlayerStatisticsDTO": {
+        "$ref": "./match-lineups.openapi.json#/components/schemas/MatchPlayerStatisticsDTO"
+      },
+      "RapidLineupsDTO": {
+        "$ref": "./match-lineups.openapi.json#/components/schemas/RapidLineupsDTO"
+      },
+      "RapidPlayersStatisticsDTO": {
+        "$ref": "./match-lineups.openapi.json#/components/schemas/RapidPlayersStatisticsDTO"
+      },
+      "MatchLineupsResult": {
+        "$ref": "./match-lineups.openapi.json#/components/schemas/MatchLineupsResult"
       }
     }
   }

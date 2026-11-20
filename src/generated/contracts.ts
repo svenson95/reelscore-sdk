@@ -765,6 +765,131 @@ export interface components {
       data: components['schemas']['TeamDTO'][];
       length: number;
     };
+    LineupPlayer: {
+      id: number | null;
+      name: string | null;
+      number: number | null;
+      pos: string | null;
+      grid: string | null;
+    };
+    LineupTeam: {
+      id: number | null;
+      name: string | null;
+      logo: string | null;
+      colors: {
+        player: {
+          primary: string | null;
+          number: string | null;
+          border: string | null;
+        };
+        goalkeeper: {
+          primary: string | null;
+          number: string | null;
+          border: string | null;
+        };
+      } | null;
+    };
+    LineupDTO: {
+      team: components['schemas']['LineupTeam'];
+      formation: string | null;
+      startXI: {
+        player: components['schemas']['LineupPlayer'];
+      }[];
+      substitutes: {
+        player: components['schemas']['LineupPlayer'];
+      }[];
+      coach: {
+        id: number | null;
+        name: string | null;
+        photo: string | null;
+      };
+    };
+    MatchPlayerStatistics: {
+      games: {
+        minutes: number | null;
+        number: number | null;
+        position: string | null;
+        rating: string | null;
+        captain: boolean | null;
+        substitute: boolean | null;
+      };
+      offsides: number | null;
+      shots: {
+        total: number | null;
+        on: number | null;
+      };
+      goals: {
+        total: number | null;
+        conceded: number | null;
+        assists: number | null;
+        saves: number | null;
+      };
+      passes: {
+        total: number | null;
+        key: number | null;
+        accuracy: string | null;
+      };
+      tackles: {
+        total: number | null;
+        blocks: number | null;
+        interceptions: number | null;
+      };
+      duels: {
+        total: number | null;
+        won: number | null;
+      };
+      dribbles: {
+        attempts: number | null;
+        success: number | null;
+        past: number | null;
+      };
+      fouls: {
+        drawn: number | null;
+        committed: number | null;
+      };
+      cards: {
+        yellow: number | null;
+        red: number | null;
+      };
+      penalty: {
+        won: number | null;
+        commited: number | null;
+        scored: number | null;
+        missed: number | null;
+        saved: number | null;
+      };
+    };
+    MatchPlayerStatisticsDTO: {
+      team: {
+        id: number | null;
+        name: string | null;
+        logo: string | null;
+      };
+      players: {
+        player: {
+          id: number | null;
+          name: string | null;
+          photo: string | null;
+        };
+        statistics: components['schemas']['MatchPlayerStatistics'][];
+      }[];
+    };
+    RapidLineupsDTO: {
+      parameters: {
+        fixture: string | number;
+      };
+      response: components['schemas']['LineupDTO'][];
+    };
+    RapidPlayersStatisticsDTO: {
+      parameters: {
+        fixture: string | number;
+      };
+      response: components['schemas']['MatchPlayerStatisticsDTO'][];
+    };
+    MatchLineupsResult: {
+      lineups: components['schemas']['LineupDTO'][];
+      playerStatistics: components['schemas']['MatchPlayerStatisticsDTO'][];
+    };
   };
   responses: never;
   parameters: never;

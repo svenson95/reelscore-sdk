@@ -181,3 +181,14 @@ export type LiveFixtureEventsUpdateDTO =
 export type LiveFixtureEventsBatchUpdateDTO =
   components['schemas']['LiveFixtureEventsBatchUpdateDTO'];
 export type GetAllTeamsDTO = components['schemas']['GetAllTeamsDTO'];
+export type LineupPlayer = components['schemas']['LineupPlayer'];
+export type LineupTeam = components['schemas']['LineupTeam'];
+export type LineupDTO = components['schemas']['LineupDTO'];
+export type MatchPlayerStatistics =
+  components['schemas']['MatchPlayerStatistics'];
+export type MatchPlayerStatisticsDTO =
+  components['schemas']['MatchPlayerStatisticsDTO'];
+export type RapidLineupsDTO = components['schemas']['RapidLineupsDTO'];
+export type RapidPlayersStatisticsDTO =
+  components['schemas']['RapidPlayersStatisticsDTO'];
+export type MatchLineupsResult = components['schemas']['MatchLineupsResult'];
